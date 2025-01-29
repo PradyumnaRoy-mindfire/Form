@@ -1,0 +1,386 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;  /*padding and border are included within the width and height,otherwise width or height = width or height + padding or border */
+}
+body {
+    /* font-size: 20px; */
+    font-size: calc(8px + 1vw);
+    color: whitesmoke;
+    background-color: white; 
+}
+.container {
+    display: flex;
+    justify-content: center; /* horizontally center */
+}
+    
+.form-container {
+    display: flex;
+    justify-content: center; /* horizontally center to its parent*/
+    align-items: center;  /* vertically center to its parent */
+    width: 100%;
+    border: 1px solid red;
+}
+form{
+    width: 90%;
+}
+.container1 {
+    width: 30%;;
+    padding: 5px;
+    margin: 15px;               /*margin properties are used to create space around elements, outside of any defined borders. */
+    border-top: 3px solid rgb(116, 100, 100);    
+    border-bottom: 3px solid rgb(70, 59, 59); /*border : width   style(dotted,solid,dashed etc)  color */
+    background-color: rgb(0, 0, 0);
+    box-shadow: 10px 10px 10px  darkgray;
+}
+.container2 {
+    width: 70%;
+    /* height: fit-content; */    /* It will make the height according to the no. of new row */
+    padding: 5px;
+    margin: 15px;               
+    border-top: 3px solid rgb(116, 100, 100);    
+    border-bottom: 3px solid rgb(70, 59, 59); /*border : width   style(dotted,solid,dashed etc)  color */
+    background-color: rgb(0, 0, 0);
+    box-shadow: 0px 0px 15px 10px  darkgray inset;
+    overflow-x: auto;
+}
+
+h2 {
+    /* text-shadow: 3px 2px 1px grey; */
+    /* font-size: 30px; */
+    font-size: calc(16px + 2vw);
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom:3px ;
+    background: linear-gradient(to right ,red,blue);
+    background-clip: text;
+    color: transparent;
+}
+.input-name{
+    padding: 7px;
+    position: relative;
+    width: 100%;
+}
+
+input::placeholder {
+    font-size:calc(1px + 1vw) ;
+}
+
+.inp-typ1 ,.inp-addr{
+    outline: none;
+    border-radius: 10px;
+    height: 30px;
+    padding: 5px;
+}
+#phoneDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2px;
+}
+#countryCode {
+    flex: 1;
+    width: 10%;
+}
+
+input[type='radio']{
+    /* appearance: none; */
+    height: 20px;
+    width: 8%;
+}
+
+
+.inp-addr {
+    margin: 5px ;
+}
+.redStar::after{
+    content: " *";
+    color: red;
+    /* font-size:calc(2px + 1vw) ; */
+}
+.err-msg {
+    font-size: calc(2px + 1vw);
+    /* font-size: 5px; */
+    font-family:sans-serif;
+    font-style: italic;
+    margin-left: 3%;
+    color: red;
+}
+.password-toggle-icon {
+    margin-right: 12px;
+    position: absolute;
+    top: 59.5%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer; 
+}
+  
+#eye {
+    font-size: calc(5px + 1vw);
+    line-height: 1;
+    color: #333;
+}
+input[type='password'] {
+    width: 98%;
+}
+
+#eye:hover {
+    color: #b98888;
+}
+  
+label{
+    font-weight: bold;
+    padding: 2px;
+}
+#check {
+   margin-left: 25px;
+   font-size: calc(3px + 1vw);
+}
+
+/* to make each input field in center */
+
+.storage {
+    /* font-size: 20px; */
+    font-size: calc(2px + 1.5vw);
+    height: 35px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bolder;
+    background: linear-gradient(45deg,#4f1919,#ff3333);
+    
+    margin-bottom: calc(3px + 1vw);
+    /* border: 1px solid rgb(10, 145, 111); */
+    box-shadow: 0px 0px 4px 4px rgb(128, 119, 119);
+}
+.storage:hover {
+    background: linear-gradient(45deg,#ff3333,#4f1919);
+    box-shadow: 0px 0px 6px 6px rgb(128, 119, 119);
+    transform: scale(1.1);
+}
+.input-address, .input-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#gender {
+    padding: 7px;
+}
+
+input {
+    border: none;
+}
+
+input:hover {
+    box-shadow: 0px 0px 20px 3px whitesmoke;
+}
+
+table,th,td {
+    padding: 5px;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+    text-align: center;
+    border: 2px solid rgb(180, 155, 155);
+    
+}
+table {
+    width: 100%;  /*To take the total width*/
+}
+tr:nth-child(even) {
+    background-color: #b0b8b8;
+}
+
+table:hover {
+    tr:nth-child(odd) {
+        background-color: #b0b8b8;
+    }
+    tr:nth-child(even) {
+        /* background-color: rgb(97, 87, 87); */
+        background-color: black;
+    }
+}
+
+
+/* Media Queries to have an alternate CSS section right inside your style sheet. */
+@media screen and (max-width: 935px) {
+    .container {
+      flex-direction: column;
+    }
+    .container1,.container2 {
+        width: 100%;
+    }
+    .container {
+        margin-right: 25px;
+    }
+}
+
+
+.btnEdit {
+    background-color: rgb(44, 212, 44);
+    border-radius: 10px;
+    color: #464949;
+    font-size: calc(3px + 1vw);
+    margin: 2px;
+    width:80%;
+    border: 2px solid rgb(9, 175, 9);
+}
+.btnEdit:hover {
+    background-color: greenyellow;
+    transform: scale(1.1);
+}
+.btnDelete {
+    background-color: rgb(243, 65, 42);
+    border-radius:10px ;
+    color: #464949;
+    font-size: calc(1px + 1vw);
+    margin: 2px;
+    width: 80%;
+    border: 2px solid rgb(221, 0, 0)
+}
+.btnDelete:hover {
+    background-color: rgb(240, 140, 34);
+    transform: scale(1.1);
+}
+
+.errorEffect {
+    border: 2px solid red;
+    box-shadow: 0px 0px 20px 3px red;
+}
+.recomandation {
+    font-size: calc(1px + 0.9vw);
+    font-family: sans-serif;
+    display: none;
+}
+
+    /* Wrapper and fullwidth is to fix the position of icon */
+.wrapper{
+    position: relative;
+}
+.fullWidth{
+    width: 98%;
+}
+.warning {
+    font-size: calc(1px + 1vw);
+    margin-right: 12px;
+    position: absolute;
+    top: 59.5%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+
+
+select:hover {
+    box-shadow: 0px 0px 20px 3px whitesmoke;
+}
+.storagePopup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(1);
+    background-color:bisque;
+    color: black;
+    box-shadow: 10px 10px 5px rgb(138, 135, 135);
+    width: 25%;
+    height: calc(30px + 15vw);
+    display: none;
+    border: 2px solid black;
+    z-index: 2;
+}
+
+.storageContent {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: calc(1px + 0.5vw);
+    padding: calc(1px + 0.5vw);
+}
+#successIcon {
+    position: relative;
+    left: 35%;
+    font-size: calc(5px + 5vw);
+    margin: calc(1px + 0.2vw);
+    padding: calc(1px + 0.2vw);
+}
+.storageContent>h4,p {
+    padding: calc(1px + 0.5vw);
+}
+.storageContent>p {
+    font-size: calc(3px + 1vw);
+}
+        /* FOr delete pop up */
+.deletePopup {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(1);
+    background-color:bisque;
+    /* display: none; */
+    color: black;
+    box-shadow: 10px 10px 5px rgb(138, 135, 135);
+    width: 25%;
+    height: calc(30px + 15vw);
+    z-index: 2;
+}
+.deleteContent {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: calc(1px + 0.5vw);
+    padding: calc(1px + 0.5vw);
+}
+#deleteIcon {
+    position: relative;
+    left: 35%;
+    font-size: calc(5px + 5vw);
+    margin: calc(1px + 0.2vw);
+    padding: calc(1px + 0.2vw);
+}
+.deleteContent>h4,p {
+    padding: calc(1px + 0.5vw);
+}
+.deleteContent>p {
+    font-size: calc(3px + 1vw);
+}
+.btn {
+    border: none;
+    margin: 3px;
+}
+#btnCancelPopup {
+    background-color: beige;
+    margin: 3px;
+    display: flex;
+    float: right;
+    padding: calc(1px + 0.5vw);
+    border: none;
+    border-radius: 15px;
+    border: 2px solid grey;
+    box-shadow: 0 9px #999;
+}
+#btnCancelPopup:active {
+    box-shadow: 0 5px #555151;
+    transform: translateY(4px);
+}
+#btnDeletePopup {
+    background-color: #ff3333;
+    margin: 3px;
+    display: flex;
+    float: right;
+    padding: calc(1px + 0.5vw);
+    border: none;
+    border-radius: 15px;
+    border: 2px solid grey;
+    box-shadow: 0 9px #999;
+}
+#btnCancelPopup:active {
+    box-shadow: 0 5px #555151;
+    transform: translateY(4px);
+}
+
+.showPopup {
+    display: block;
+    /* background: blur(3px); */
+}
+.doBlur {
+    filter: blur(8px);
+}

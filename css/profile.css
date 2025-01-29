@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    /* font-size: 20px; */
+    font-size: calc(5px + 1vw);
+    color: rgb(83, 77, 77);
+    background-color: white; 
+}
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(1);
+    border: 2px solid red;
+    width: 30%;
+    display: flex;                      
+    justify-content: center;
+    border-radius: 8%;
+}
+.login-box {
+    width: 80%;
+    margin: 20px;
+    /* border:3px solid black ; */
+}   
+.inpDiv{
+    width: 100%;
+    margin: 15px;
+}
+input{
+    height: calc(10px + 1vw);
+    width: 75%;
+}
+#genderpf {
+    width: 90%;
+    font-size: calc(3px + 1vw);
+    display: flex;
+}
+.icon {
+   
+    padding: 10px;
+    padding-top: 20px;
+    /* margin-top: 10px; */
+}
+/* .genderPos{
+    margin-top: 30px;
+} */
