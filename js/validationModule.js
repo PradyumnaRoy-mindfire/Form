@@ -102,12 +102,12 @@ var validationModule = (function(){
 
 
         
-        // //Gender Validations
+        //Gender Validations
     
-            // if(!$('#male').prop('checked')||!$('#female').prop('checked')||!$('#others').prop('checked')) {
-            //     genderErr.text("**Select your gender...");
-            //     isValid = false;
-            // }
+            if(!$('#male').prop('checked')||!$('#female').prop('checked')||!$('#others').prop('checked')) {
+                genderErr.text("**Select your gender...");
+                isValid = false;
+            }
          
             
 
