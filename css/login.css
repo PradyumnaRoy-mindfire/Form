@@ -125,7 +125,6 @@ label{
 /* to make each input field in center */
 
 .login {
-    /* font-size: 20px; */
     width: 98%;
     font-size: calc(2px + 1.5vw);
     height: 35px;
@@ -135,7 +134,6 @@ label{
     background: linear-gradient(45deg,#4f1919,#ff3333);
     margin-top: calc(2px + 1vw);
     margin-bottom: calc(2px + 0.5vw);
-    /* border: 1px solid rgb(10, 145, 111); */
     box-shadow: 0px 0px 4px 4px rgb(128, 119, 119);
 }
 .login:hover {
@@ -245,21 +243,6 @@ input:hover {
 .loginContent>p {
     font-size: calc(3px + 1vw);
 }
-        /* FOr delete pop up */
-.deletePopup {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%) scale(1);
-    background-color:bisque;
-    /* display: none; */
-    color: black;
-    box-shadow: 10px 10px 5px rgb(138, 135, 135);
-    width: 25%;
-    height: calc(30px + 15vw);
-    z-index: 2;
-}
 .deleteContent {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: calc(1px + 0.5vw);
@@ -272,12 +255,7 @@ input:hover {
     margin: calc(1px + 0.2vw);
     padding: calc(1px + 0.2vw);
 }
-.deleteContent>h4,p {
-    padding: calc(1px + 0.5vw);
-}
-.deleteContent>p {
-    font-size: calc(3px + 1vw);
-}
+
 .btn {
     border: none;
     margin: 3px;

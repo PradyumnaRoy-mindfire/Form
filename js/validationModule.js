@@ -57,11 +57,9 @@ var validationModule = (function(){
         if(passwordValidation("#pass",passErr) == null) {
             isValid =  true
         }
-                //Password  validation for form page
-        if(passwordValidation('#loginPass',$("#loginPass-err")) == null) {
-            isValid = true;
-        }
-        
+          
+
+
 
         // //email validation
         $('#email').keyup(function(){
@@ -106,8 +104,7 @@ var validationModule = (function(){
         
          
 
-         //Terms & Condition Validations
-         
+         //Terms & Condition Validations        
         $("#terms").change(function() {
             if($("#terms").prop("checked") == false) {
                 $("#terms").addClass('errorEffect')

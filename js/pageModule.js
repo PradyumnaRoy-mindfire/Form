@@ -79,17 +79,25 @@ var pageModule = (function($){
     }
     //         //Show Password
     function showHiddenPassword() {
+            // For registration form
         $('.eye').click(function() {
-            let temp = $('#pass').attr('type')
             $("#pass").addClass("fullWidth");
             if ($('#pass').attr('type') === "password") {
                 $('#pass').attr('type','text');
             } else {
                 $('#pass').attr('type','password');;
             }
+            //for login form
+            $("#loginPass").addClass("fullWidth");
+            if ($('#loginPass').attr('type') === "password") {
+                $('#loginPass').attr('type','text');
+            } else {
+                $('#loginPass').attr('type','password');;
+            }
+
         });
     }
-    function displaySubmitPopup(place) {
+    function displaySubmitPopup(place) {      //place is refering where to show after login or after registration
         $(".container").addClass("doBlur")
         $(`${place}`).show();
         setTimeout(function() {
@@ -98,9 +106,6 @@ var pageModule = (function($){
         },1000)
     }
 
-    function displayDeletePopup() {
-        $(".deletePopup").addClass('showPopup');
-    }
     
     function init() {
         hideError();
@@ -110,6 +115,5 @@ var pageModule = (function($){
     return {
         init:init,
         displaySubmitPopup:displaySubmitPopup,
-        displayDeletePopup:displayDeletePopup,
     }
 })(jQuery)
