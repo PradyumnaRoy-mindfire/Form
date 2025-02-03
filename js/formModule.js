@@ -7,39 +7,46 @@ var formModule = (function($){
 
         $("#localstorage").on("click",(e)=> {
             e.preventDefault();
-            if(selectedRow == null) {
-                let data = readFormData();
-                storedInLocalStorage(data);
-                console.log(data.gender,"Gender in reading");
-                let isValid = validationModule.validation(data);
+            
+            let data = readFormData();
+            storedInLocalStorage(data);
+            let isValid = validationModule.validation(data);
 
-                $(document).on('isValidUpdated', function(event, newIsValid) {
-                    isValid = newIsValid;
-                    console.log("isvalid updated",isValid);
-                });
-                console.log("Before going to the login page",validationModule.validation(data));
-                if(isValid) {
-                    pageModule.displaySubmitPopup('.storagePopup');
-                    setTimeout(function(){
-                        window.location.assign("./login.html") ;    
-                    },1000)
-                }
-            } 
+            $(document).on('isValidUpdated', function(event, newIsValid) {
+                isValid = newIsValid;
+                console.log("isvalid updated",isValid);
+            });
+            console.log("Before going to the login page",validationModule.validation(data));
+            if(isValid) {
+                pageModule.displaySubmitPopup('.storagePopup');
+                setTimeout(function(){
+                    window.location.assign("./login.html") ;    
+                },1000)
+            }
+            
             
         });
         $("#sessionstorage").on("click",(e)=> {
             e.preventDefault();
           
-            if(selectedRow == null) {
-                let data = readFormData()
-                storedInSessionStorage(data);
-               
-            } else {
-                tableModule.updateRecord(selectedRow);
-            }
-            $(document).on('selectedRowUpdated', function(event, updatedRow) {
-                selectedRow = updatedRow;
+    
+            let data = readFormData()
+            storedInSessionStorage(data);
+            let isValid = validationModule.validation(data);
+
+            $(document).on('isValidUpdated', function(event, newIsValid) {
+                isValid = newIsValid;
+                console.log("isvalid updated",isValid);
             });
+            console.log("Before going to the login page",validationModule.validation(data));
+            if(isValid) {
+                pageModule.displaySubmitPopup('.storagePopup');
+                setTimeout(function(){
+                    window.location.assign("./login.html") ;    
+                },1000)
+            }
+        
+           
            
         });
 

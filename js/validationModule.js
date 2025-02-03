@@ -51,6 +51,7 @@ var validationModule = (function(){
                 isValid = false;
             }
         });
+       
 
                 //Password  validation for registration page
         if(passwordValidation("#pass",passErr) == null) {
@@ -60,7 +61,7 @@ var validationModule = (function(){
         if(passwordValidation('#loginPass',$("#loginPass-err")) == null) {
             isValid = true;
         }
-       
+        
 
         // //email validation
         $('#email').keyup(function(){
@@ -79,7 +80,7 @@ var validationModule = (function(){
             }
         });
 
-
+       
             //Pincode validation
         $('#pin').keyup(function() {
             let enteredInput = $("#pin").val(); 
@@ -102,14 +103,8 @@ var validationModule = (function(){
 
 
         
-        //Gender Validations
-    
-            if(!$('#male').prop('checked')||!$('#female').prop('checked')||!$('#others').prop('checked')) {
-                genderErr.text("**Select your gender...");
-                isValid = false;
-            }
+        
          
-            
 
          //Terms & Condition Validations
          
@@ -141,7 +136,7 @@ var validationModule = (function(){
                 isValid = false;
             }
         })
-
+        
 
                 //For login page email validation
         $('#loginEmail').keyup(function(){
@@ -159,8 +154,9 @@ var validationModule = (function(){
                 $("#loginEmail").addClass('errorEffect');
             }
         });
+        
 
-        if(formData.fname == "" || formData.pass == "" || formData.phno == "" || formData.email == "" || formData.gender == "" || formData.pin == "" || formData.terms == false){
+        if(formData.fname == "" || formData.pass == "" || formData.phno == "" || formData.email == ""  || formData.pin == "" || formData.terms == false){
             isValid = false;
         }
         $(document).trigger('isValidUpdated',isValid); 
