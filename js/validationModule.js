@@ -22,8 +22,8 @@ var validationModule = (function(){
 
 
         let isValid = true;
+
                 // firstname validation
-        
         $("#fname").keyup(function() {
             let enteredInput = $("#fname").val();
             if(enteredInput == "") {
@@ -34,7 +34,7 @@ var validationModule = (function(){
             else if(enteredInput.match(/\d/)){
                 fnameErr.text( "**First name should not contain any digit...");
                 $("#fname").addClass('errorEffect');
-                
+                isValid = false;
             }
         });
                 //Lastname validation
@@ -48,62 +48,19 @@ var validationModule = (function(){
             else if(enteredInput.match(/\d/)){
                 lnameErr.text( "**Last name should not contain any digit...");
                 $("#lname").addClass('errorEffect');
-                
-            }
-        });
-
-        
-       
-
-                //Old password validation
-        // if(formData['pass'] ==="" || formData['pass'].length  < 6 || formData['pass'].length  > 50 ||/[^a-zA-Z0-9\s]/.test(formData["pass"]) == false) {
-        //     isValid = false;
-        //     passErr.text("**Password is not valid");
-        //     $("#pass").addClass('errorEffect') ;   //for red border 
-
-            // if(formData["pass"] ==="") {
-            //     passErr.textContent = "**This field is required..";
-            // }
-            // if(formData['pass'].length  < 2)
-            //     passErr.textContent = "**Password is too small "; //password word will contain atleast 6 characters 
-            // if(formData['pass'].length  > 10)
-            //     passErr.textContent = "**Password is too large "; iife
-            // if(/[^a-zA-Z0-9\s]/.test(formData["pass"]) == false)
-
-        // }
-
-
-
-        $("#pass").keyup(function() {
-            let enteredInput = $("#pass").val();
-            if(enteredInput == "") {
-                passErr.text( "**This field is required...");
-                $("#pass").addClass('errorEffect');
                 isValid = false;
             }
-            else if(enteredInput.length > 10){
-                passErr.text( "**Password is too large...");
-                $("#pass").addClass('errorEffect');
-            }
-            else if(!enteredInput.match(/\d/)){
-                passErr.text( "**Password has no digit...");
-                $("#pass").addClass('errorEffect');
-            }
-            else if(!enteredInput.match(/[a-z]/)){
-                passErr.text( "**Password has no small character...");
-                $("#pass").addClass('errorEffect');
-            }
-            else if(!enteredInput.match(/[A-Z]/)){
-                passErr.text( "**Password has no capital character...");
-                $("#pass").addClass('errorEffect');
-            }
-            else if(enteredInput.length < 6){
-                passErr.text( "**Password is too small...");
-                $("#pass").addClass('errorEffect');
-            }
-            
         });
 
+                //Password  validation for registration page
+        if(passwordValidation("#pass",passErr) == null) {
+            isValid =  true
+        }
+                //Password  validation for form page
+        if(passwordValidation('#loginPass',$("#loginPass-err")) == null) {
+            isValid = true;
+        }
+       
 
         // //email validation
         $('#email').keyup(function(){
@@ -122,49 +79,138 @@ var validationModule = (function(){
             }
         });
 
-            //Old email validations
-        // let emailRegx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]/
-        // if(formData['email'] ==="" || emailRegx.test(formData['email']) == false) {
-        //     isValid = false;
-        //     emailErr.text("**Email is not valid...");
-        //     $("#email").addClass('errorEffect');
-        // }
 
             //Pincode validation
-        if(formData['pin'] === ""||formData['pin'].length > 7 || formData['pin'].length <5  || /^\d+$/.test(formData['pin']) == false) {
-            pinErr.text("**Pincode is not valid..");
-            $("#pin").addClass('errorEffect');
-            isValid = false;
-        }
-        
-        // //Gender Validations
-            if(formData.gender == null) {
-                genderErr.text("**Select your gender...");
+        $('#pin').keyup(function() {
+            let enteredInput = $("#pin").val(); 
+            if(enteredInput == "") {
+                pinErr.text("**This field is required..");
+                $("#pin").addClass('errorEffect');
                 isValid = false;
             }
+            else if(/^\d+$/.test(enteredInput) == false) {
+                pinErr.text("**Pin no. contains digits only...");
+                $("#pin").addClass('errorEffect');
+                isValid = false;
+            }
+            else if(enteredInput.length < 5 || enteredInput.length > 7) {
+                pinErr.text("**Pin no. has 6 digits only...");
+                $("#pin").addClass('errorEffect');
+                isValid = false;
+            }
+        })
+
+
+        
+        // //Gender Validations
+    
+            // if(!$('#male').prop('checked')||!$('#female').prop('checked')||!$('#others').prop('checked')) {
+            //     genderErr.text("**Select your gender...");
+            //     isValid = false;
+            // }
          
+            
 
          //Terms & Condition Validations
+         
+        $("#terms").change(function() {
+            if($("#terms").prop("checked") == false) {
+                $("#terms").addClass('errorEffect')
+                termsErr.text("**Accept the terms and conditions...") ;
+                isValid = false;
+            }
+        })
         
-         if(formData["terms"] == false) {
-            $("#terms").addClass('errorEffect')
-            termsErr.text("**Accept the terms and conditions...") ;
-            isValid = false;
-         }
 
          //phno
-         if(formData['phno'].length != 10 ||  /^\d+$/.test(formData['phno']) == false) {
-            phnoErr.text("**Phone no is not valid..");
-            $("#phno").addClass('errorEffect')
+        $('#phno').keyup(function(){
+            let enteredInput = $("#phno").val();
+            if(enteredInput == ""){
+                phnoErr.text("**This field is required...");
+                $("#phno").addClass('errorEffect')
+                isValid = false;
+            }
+            else if(/^\d+$/.test(enteredInput) == false) {
+                phnoErr.text("**Phone no has ten digit only..");
+                $("#phno").addClass('errorEffect')
+                isValid = false;
+            }
+            else if(enteredInput.length != 10 ) {
+                phnoErr.text("**Phone no is not valid..");
+                $("#phno").addClass('errorEffect')
+                isValid = false;
+            }
+        })
+
+
+                //For login page email validation
+        $('#loginEmail').keyup(function(){
+            let emailRegx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]/
+            let enteredInput = $("#loginEmail").val();
+            if(enteredInput == ""){
+                isValid = false;
+                $("#loginEmail-err").text( "**This field is required...");
+                $("#loginEmail").addClass('errorEffect');
+            }
+            
+            else if(emailRegx.test(enteredInput) == false) {
+                isValid = false;
+                $("#loginEmail-err").text("**Email is not valid...");
+                $("#loginEmail").addClass('errorEffect');
+            }
+        });
+
+        if(formData.fname == "" || formData.pass == "" || formData.phno == "" || formData.email == "" || formData.gender == "" || formData.pin == "" || formData.terms == false){
             isValid = false;
         }
-
-        console.log(formData);
-
-        //  If valid data is filled in all fields
+        $(document).trigger('isValidUpdated',isValid); 
+        
         return isValid
      
     }
+
+
+
+
+    function passwordValidation(passSelecter,passErrSelecter) {
+        let isValid = true;
+        $(`${passSelecter}`).keyup(function() {
+            let enteredInput = $(`${passSelecter}`).val();
+            if(enteredInput == "") {
+                passErrSelecter.text( "**This field is required...");
+                $(`${passSelecter}`).addClass('errorEffect');
+                isValid = false;
+            }
+            else if(enteredInput.length > 10){
+                passErrSelecter.text( "**Password is too large...");
+                $(`${passSelecter}`).addClass('errorEffect');
+                isValid = false;
+            }
+            else if(!enteredInput.match(/\d/)){
+                passErrSelecter.text( "**Password has no digit...");
+                $(`${passSelecter}`).addClass('errorEffect');
+                isValid = false;
+            }
+            else if(!enteredInput.match(/[a-z]/)){
+                passErrSelecter.text( "**Password has no small character...");
+                $(`${passSelecter}`).addClass('errorEffect');
+                isValid = false;
+            }
+            else if(!enteredInput.match(/[A-Z]/)){
+                passErrSelecter.text( "**Password has no capital character...");
+                $(`${passSelecter}`).addClass('errorEffect');
+                isValid = false;
+            }
+            else if(enteredInput.length < 6){
+                passErrSelecter.text( "**Password is too small...");
+                $(`${passSelecter}`).addClass('errorEffect');
+                isValid = false;
+            }
+            return isValid;
+            
+        });
+    }
+
     function init(){
         validation(formData)
     }

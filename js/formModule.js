@@ -1,16 +1,39 @@
 var formModule = (function($){
     var formData = {"fname":"","lname":"","pass":"","phno":"","email":"","gender":"","address":"","pin":"","terms":""};
-    var selectedRow = null;    // //Error 
+    var selectedRow = null;    //Error 
     var i = 0;
     function init() {
-        ValidAndcontrolShow(formData);
+        validationModule.validation(formData);
+
+        $("#localstorage").on("click",(e)=> {
+            e.preventDefault();
+            if(selectedRow == null) {
+                let data = readFormData();
+                storedInLocalStorage(data);
+                console.log(data.gender,"Gender in reading");
+                let isValid = validationModule.validation(data);
+
+                $(document).on('isValidUpdated', function(event, newIsValid) {
+                    isValid = newIsValid;
+                    console.log("isvalid updated",isValid);
+                });
+                console.log("Before going to the login page",validationModule.validation(data));
+                if(isValid) {
+                    pageModule.displaySubmitPopup('.storagePopup');
+                    setTimeout(function(){
+                        window.location.assign("./login.html") ;    
+                    },1000)
+                }
+            } 
+            
+        });
         $("#sessionstorage").on("click",(e)=> {
             e.preventDefault();
           
             if(selectedRow == null) {
                 let data = readFormData()
                 storedInSessionStorage(data);
-                formModule.login();
+               
             } else {
                 tableModule.updateRecord(selectedRow);
             }
@@ -19,25 +42,16 @@ var formModule = (function($){
             });
            
         });
-        $("#localstorage").on("click",(e)=> {
+
+        
+        $(".login").on('click',function(e) {
+            console.log("Login bton clicked");
             e.preventDefault();
-    
-            if(selectedRow == null) {
-                let data = readFormData();
-                storedInLocalStorage(data);
-                console.log(localStorage);
-                formModule.login();
-            } else {
-                tableModule.updateRecord(selectedRow);
-            }
-            $(document).on('selectedRowUpdated', function(event, updatedRow) {
-                selectedRow = updatedRow;
-            });
-           
+            login();
         });
+
         function readFormData() {
             formData.fname = $('#fname').val();
-            // formData["fname"] = $('#fname').val();
             formData["lname"] = $('#lname').val();
             formData["pass"] = $('#pass').val();
             formData["phno"] = $('#phno').val();
@@ -60,7 +74,6 @@ var formModule = (function($){
             formData.index = i++;  
             console.log(formData);
              
-            // ValidAndcontrolShow(formData);
 
             return formData;
         }
@@ -86,54 +99,95 @@ var formModule = (function($){
             sessionStorage.setItem('pin',formData.pin);
             sessionStorage.setItem('terms',formData.terms);
         }
-
+        profile()
     }
+    let flag = false;
     function login() {
+        console.log("Login fuction called");
+        let loginValid = true;
         let localEmail = localStorage.getItem('email');
         let localPass = localStorage.getItem('pass');
         let sessionEmail = sessionStorage.getItem('email');
         let sessionPass = sessionStorage.getItem('pass');
         let inputEmail = $("#loginEmail").val();
         let inputPass = $("#loginPass").val();
-        if(localEmail != inputEmail || sessionEmail != inputEmail){
-            $('#loginEmail').keyup(function(){
-                let emailRegx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]/
-                let enteredInput = $("#loginEmail").val();
-                if(enteredInput == ""){
-                    isValid = false;
-                    emailErr.text( "**This field is required...");
-                    $("#loginEmail").addClass('errorEffect');
-                }
-                
-                else if(emailRegx.test(enteredInput) == false) {
-                    isValid = false;
-                    emailErr.text("**Email is not valid...");
-                    $("#loginEmail").addClass('errorEffect');
-                }
+      
+        if(localEmail != inputEmail && sessionEmail != inputEmail){
+            console.log("Email doesnot matched");
+            $('#loginEmail').keyup(function() {
+                $('#loginEmail-err').text("**Email is not valid...");
+                $("#loginEmail").addClass('errorEffect');
             });
+            loginValid = false;
         }
+      
+        if(localPass != inputPass && sessionPass != inputPass) {
+            $('#loginPass').keyup(function() {
+                $('#loginPass-err').text("**Password is not valid...");
+                $("#loginPass").addClass('errorEffect');
+            });
+            loginValid = false;
+        }
+                //If localstorage email is input but localStorage password is not provided
+        if((localEmail == inputEmail && localPass != inputPass) || (sessionEmail == inputEmail && sessionPass != inputPass)){
+            console.log("pass doesnot matched");
+            $('#loginPass').keyup(function() {
+                $('#loginPass-err').text("**Password is wrong...");
+                $("#loginPass").addClass('errorEffect');
+            });
+            loginValid = false;
+        }
+        console.log(loginValid);
+        
+        if(loginValid == true) {
+            flag = true;
+            pageModule.displaySubmitPopup(".loginPopup")
+            setTimeout(function(){
+                window.location.assign("./profile.html");
+            },1000)
+
+        }
+        
+    }
+ 
+   
+    function profile() {
+        let fname = localStorage.getItem('fname');
+        let lname = localStorage.getItem('lname');
+        let address = localStorage.getItem('address');
+        let email = localStorage.getItem('email');
+        let phno = localStorage.getItem('phno');
+        $("#fnameProfile").val(fname);
+        $("#lnameProfile").val(lname);
+        $("#phnoProfile").val(phno);
+        $("#emailProfile").val(email);
+        $("#addressProfile").val(address);
+        $(".inpDiv").on('click',function(){
+            $('.update').show();
+        })
+        $("#btnUpdate").on("click",function(e){
+            e.preventDefault();
+            localStorage.setItem('fname',$("#fnameProfile").val());
+            localStorage.setItem('lname',$("#lnameProfile").val());
+            localStorage.setItem('address',$("#addressProfile").val());
+            localStorage.setItem('email',$("#emailProfile").val());
+            localStorage.setItem('phno',$("#phnoProfile").val());
+        })
+        favouriteModule.readFavouriteData();
+        
     }
     
     function resetForm() {
         $("#form")[0].reset(); 
     }
-    function ValidAndcontrolShow(formData) {
-        let isValid = validationModule.validation(formData)
-        console.log("isvalid",isValid);
-        if(isValid == true && selectedRow == null) {
-            console.log("Form validated");
-            resetForm()
-            // tableModule.showData();
-            // pageModule.displaySubmitPopup();
-        }
-    }
+  
 
     return {
+        profile:profile,
         login:login,
         init:init ,
         formData:formData,
         resetForm : resetForm,
-        // ValidAndcontrolShow:ValidAndcontrolShow
     }
 })(jQuery);
 

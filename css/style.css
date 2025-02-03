@@ -4,10 +4,11 @@
     box-sizing:border-box;  /*padding and border are included within the width and height,otherwise width or height = width or height + padding or border */
 }
 body {
-    /* font-size: 20px; */
     font-size: calc(8px + 1vw);
     color: whitesmoke;
-    background-color: white; 
+    background-image: url("./whiteBackground.jpg");
+    background-size: cover;
+    backdrop-filter: blur(2px);
 }
 .container {
     display: flex;
@@ -31,7 +32,7 @@ form{
     border-top: 3px solid rgb(116, 100, 100);    
     border-bottom: 3px solid rgb(70, 59, 59); /*border : width   style(dotted,solid,dashed etc)  color */
     background-color: rgb(0, 0, 0);
-    box-shadow: 10px 10px 10px  darkgray;
+    box-shadow: 15px 10px 18px  rgb(46, 41, 41);
 }
 .container2 {
     width: 70%;
@@ -83,11 +84,7 @@ input::placeholder {
     width: 10%;
 }
 
-input[type='radio']{
-    /* appearance: none; */
-    height: 20px;
-    width: 8%;
-}
+
 
 
 .inp-addr {
@@ -115,7 +112,7 @@ input[type='radio']{
     cursor: pointer; 
 }
   
-#eye {
+.eye {
     font-size: calc(5px + 1vw);
     line-height: 1;
     color: #333;
@@ -124,7 +121,7 @@ input[type='password'] {
     width: 98%;
 }
 
-#eye:hover {
+.eye:hover {
     color: #b98888;
 }
   
@@ -272,10 +269,6 @@ table:hover {
 }
 
 
-
-select:hover {
-    box-shadow: 0px 0px 20px 3px whitesmoke;
-}
 .storagePopup {
     position: absolute;
     top: 50%;
@@ -379,7 +372,6 @@ select:hover {
 
 .showPopup {
     display: block;
-    /* background: blur(3px); */
 }
 .doBlur {
     filter: blur(8px);

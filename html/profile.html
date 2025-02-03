@@ -17,12 +17,16 @@
         <div class="login-box">
             <form action="" id="profile-form">
                 <div class="profileIcon" >
-                    <i class="fa-solid fa-circle-user fa-flip fa-2xl" style="color: #73fcc1;"></i>
+                    <i class="fa-solid fa-circle-user fa-flip fa-2xl" style="color: #f37932;"></i>
                  </div>
-    
+                 <h3>My Profile </h3>
+                 <div class="favourite">
+                    <i class="fa-regular fa-heart fa-lg favouriteIcon" style="color: #f53d1c;" title="Favourite"></i>
+                 </div>
                 <div class="inpDiv" id="username">
                     <i class="fa-solid fa-user  fa-lg icon"></i>
-                    <input type="text" name="" id="username">
+                    <input type="text" name="" id="fnameProfile">
+                    <input type="text" name="" id="lnameProfile">
                 </div>
     
                 <div class="inpDiv" id="phnopf">
@@ -35,36 +39,59 @@
                     <input type="email" name="" id="emailProfile">
                 </div>
     
-                <div class="inpDiv genderPos" id="genderpf" >
-                        <i class="fa-solid fa-venus-mars  fa-lg icon"></i>
-                        
-                        <input type="radio" name="gender" id="genderProfile"> <label for="">Male</label>
-                        <input type="radio" name="gender" id="genderProfile"> <label for="">Female</label>
-                        <input type="radio" name="gender" id="genderProfile"> <label for="">Others</label>
-                </div>
-    
                 <div class="inpDiv" id="addresspf">
                     <i class="fa-solid fa-location-dot fa-lg icon"></i>
                     <input type="text" name="" id="addressProfile">
                 </div>
     
-                <div class="inpDiv" id="pinpf">
-                    <i class="fa-solid fa-map-pin fa-lg icon"></i>
-                    <input type="number" name="" id="pinProfile">
-                </div>
     
                 <div class="update inpDiv">
-                    <input type="submit" value="Update">
+                    <input type="submit" value="Update" id="btnUpdate">
                 </div>
             </form>
 
         </div>
+
+       
     </div>
+    <div class="container2">
+        <div class="closeIconDiv">
+            <i class="fa-solid fa-xmark fa-xl closeFavourite" style="color: #ffffff;" title="Hide favourite"></i>
+        </div>
+        <h2>Favourites</h2>
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Item</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!-- Prepend to this row -->
+                <tr class="emptyRow">
+                    <td colspan="3" style=" text-align: center;"><button id="openForm">New</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="dropdown-form" >
+            <form id="favouriteForm">
+              <input type="text" id="favouriteName" class="favouriteFormInput" name="name" required placeholder="Name"><br><br>
+      
+              <input type="text" id="favouriteItem" class="favouriteFormInput" name="item" required placeholder="Item"><br><br>
+                
+              <button type="submit" class="Favourite-btn">Add to Favourite</button>
+            </form>
+        </div>
+    </div>
+    
+  
 
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> 
     <script src="../js/script.js"></script>
     <script src="../js/formModule.js"></script>
-    <script src="../js/tableModule.js"></script>
+    <script src="../js/favouriteModule.js"></script>
     <script src="../js/validationModule.js"></script>
     <script src="../js/pageModule.js"></script>
 </body>

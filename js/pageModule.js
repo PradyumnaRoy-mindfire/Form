@@ -77,9 +77,9 @@ var pageModule = (function($){
         
        
     }
+    //         //Show Password
     function showHiddenPassword() {
-        //         //Show Password
-        $('#eye').click(function() {
+        $('.eye').click(function() {
             let temp = $('#pass').attr('type')
             $("#pass").addClass("fullWidth");
             if ($('#pass').attr('type') === "password") {
@@ -89,11 +89,11 @@ var pageModule = (function($){
             }
         });
     }
-    function displaySubmitPopup() {
+    function displaySubmitPopup(place) {
         $(".container").addClass("doBlur")
-        $(".submitPopup").show();
+        $(`${place}`).show();
         setTimeout(function() {
-            $(".submitPopup").hide();
+            $(`${place}`).hide();
             $(".container").removeClass("doBlur")
         },1000)
     }
