@@ -1,6 +1,8 @@
 var formModule = (function($){
     var formData = {"fname":"","lname":"","pass":"","phno":"","email":"","gender":"","address":"","pin":"","terms":""};
     var i = 0;
+    var localStorageArray = []
+    var emailArray = []
     function init() {
         
         validationModule.validation(formData);
@@ -56,7 +58,11 @@ var formModule = (function($){
             });
             
         }
-        profile(storage);
+        submit()
+        if(localStorage.getItem("loginProfileEmail") != null) {
+            profile(storage);
+        }
+        
 
         function readFormData() {
             formData.fname = $('#fname').val();
@@ -86,15 +92,10 @@ var formModule = (function($){
             return formData;
         }
         function storedInLocalStorage(formData) {
-            localStorage.setItem("fname",formData.fname);
-            localStorage.setItem("lname",formData.lname);
-            localStorage.setItem("pass",formData.pass);
-            localStorage.setItem('phno',formData.phno);
-            localStorage.setItem('email',formData.email);
-            localStorage.setItem('gender',formData.gender);
-            localStorage.setItem('address',formData.address);
-            localStorage.setItem('pin',formData.pin);
-            localStorage.setItem('terms',formData.terms);
+            localStorageArray.push(formData);
+            emailArray.push(formData.email);
+            localStorage.setItem("emailArray",JSON.stringify(emailArray));
+            localStorage.setItem("formDataArray",JSON.stringify(localStorageArray));
         }
         function storedInSessionStorage(formData) {
             sessionStorage.setItem("fname",formData.fname);
@@ -112,12 +113,22 @@ var formModule = (function($){
     function login(storage) {
         console.log("Login fuction called",storage==localStorage);
         let loginValid = true;
-        let localEmail = localStorage.getItem('email');
-        let localPass = localStorage.getItem('pass');
-        let sessionEmail = sessionStorage.getItem('email');
-        let sessionPass = sessionStorage.getItem('pass');
         let inputEmail = $("#loginEmail").val();
         let inputPass = $("#loginPass").val();
+        let localEmail = "";
+        let localPass = "";
+        let dataArray = JSON.parse(localStorage.getItem("formDataArray"));
+        dataArray.forEach(element => {
+            if(inputEmail == element.email) {
+                localEmail = element.email;
+                localPass = element.pass;
+                localStorage.setItem("loginProfileEmail",element.email);
+            }
+        });
+        
+        let sessionEmail = sessionStorage.getItem('email');
+        let sessionPass = sessionStorage.getItem('pass');
+        
       
         if(localEmail != inputEmail && sessionEmail != inputEmail){
             console.log("Email doesnot matched");
@@ -149,7 +160,8 @@ var formModule = (function($){
         
         if(loginValid == true) {
             flag = true;
-            pageModule.displaySubmitPopup(".loginPopup")
+            //Displaying loginPopup after loginned successfully
+            pageModule.displaySubmitPopup(".loginPopup");
             setTimeout(function(){
                 window.location.assign("./profile.html");
             },1000)
@@ -160,26 +172,48 @@ var formModule = (function($){
  
    
     function profile(storage) {
-        let fname = storage.getItem('fname');
-        let lname = storage.getItem('lname');
-        let address = storage.getItem('address');
-        let email = storage.getItem('email');
-        let phno = storage.getItem('phno');
+        let fname = "";
+        let lname = "";
+        let address = "";
+        let email = "";
+        let phno = "";
+        let  i = 0;
+        formDataArray = JSON.parse(localStorage.getItem("formDataArray"));
+        let loginProfileEmail = localStorage.getItem("loginProfileEmail");
+        //In for-each lopp we can't use 'break' statement
+        for(i = 0;i < formDataArray.length;i++) {
+            if(loginProfileEmail == formDataArray[i].email) {
+                email = formDataArray[i].email;
+                fname = formDataArray[i].fname;
+                lname = formDataArray[i].lname;
+                address = formDataArray[i].address;
+                phno = formDataArray[i].phno;
+                break;
+            }
+        }
+
+
         $("#fnameProfile").val(fname);
         $("#lnameProfile").val(lname);
         $("#phnoProfile").val(phno);
         $("#emailProfile").val(email);
         $("#addressProfile").val(address);
+        // If the user click on the any input field 
         $(".inpDiv").on('click',function(){
             $('.update').show();
         })
         $("#btnUpdate").on("click",function(e){
             e.preventDefault();
-            storage.setItem('fname',$("#fnameProfile").val());
-            storage.setItem('lname',$("#lnameProfile").val());
-            storage.setItem('address',$("#addressProfile").val());
-            storage.setItem('email',$("#emailProfile").val());
-            storage.setItem('phno',$("#phnoProfile").val());
+            let newFormData = {
+                'fname': $("#fnameProfile").val(),
+                'lname': $("#lnameProfile").val(),
+                'address': $("#addressProfile").val(),
+                'email': $("#emailProfile").val(),
+                'phno': $("#phnoProfile").val()
+            }
+            formDataArray[i] = newFormData;
+            localStorage.setItem("formDataArray",JSON.stringify(formDataArray));
+            pageModule.displaySubmitPopup(".updatePopup");
         })
         favouriteModule.readFavouriteData();
         
@@ -206,17 +240,4 @@ var formModule = (function($){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                                                                                                                
