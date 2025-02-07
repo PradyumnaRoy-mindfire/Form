@@ -4,7 +4,6 @@
     box-sizing:border-box;  /*padding and border are included within the width and height,otherwise width or height = width or height + padding or border */
 }
 body {
-    /* font-size: 20px; */
     font-size: calc(8px + 1vw);
     color: whitesmoke;
     background-image: url("./loginbackground.jpg");
@@ -39,8 +38,7 @@ form{
 }
 
 h2 {
-    /* text-shadow: 3px 2px 1px grey; */
-    /* font-size: 30px; */
+    
     font-size: calc(16px + 2vw);
     text-align: center;
     text-decoration: underline;
@@ -69,7 +67,6 @@ input::placeholder {
 
 
 input[type='radio']{
-    /* appearance: none; */
     height: 20px;
     width: 8%;
 }
@@ -81,11 +78,9 @@ input[type='radio']{
 .redStar::after{
     content: " *";
     color: red;
-    /* font-size:calc(2px + 1vw) ; */
 }
 .err-msg {
     font-size: calc(2px + 1vw);
-    /* font-size: 5px; */
     font-family:sans-serif;
     font-style: italic;
     margin-left: 3%;
@@ -293,7 +288,6 @@ input:hover {
 
 .showPopup {
     display: block;
-    /* background: blur(3px); */
 }
 .doBlur {
     filter: blur(8px);

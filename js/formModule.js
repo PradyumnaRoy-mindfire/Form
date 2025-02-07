@@ -22,7 +22,6 @@ var formModule = (function($){
                     isValid = newIsValid;
                     console.log("isvalid updated",isValid);
                 });
-                // console.log(JSON.parse(localStorage.getItem("emailArray"))?.indexOf(data.email),"Exixting email",data.email);
 
                
                 console.log("Before going to the login page",validationModule.validation(data));
@@ -157,15 +156,7 @@ var formModule = (function($){
         
         
       
-        // if(localEmail != inputEmail && sessionEmail != inputEmail){
-        //     console.log("Email doesnot matched");
-        //     $('#loginEmail').keyup(function() {
-        //         $('#loginEmail-err').text("**Email is not valid...");
-        //         $("#loginEmail").addClass('errorEffect');
-        //     });
-        //     loginValid = false;
-        // }
-        //If localstorage email is input but localStorage password is not provided
+        
         if((storage == "localStorage" && localPass != inputPass) || (storage == "sessionStorage" && sessionPass != inputPass)){
             console.log("Pass doesnot matched");
             $('#loginPass').keyup(function() {

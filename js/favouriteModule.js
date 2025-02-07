@@ -96,9 +96,7 @@ var favouriteModule = (function($){
     
    
     function init(){
-        
         readFavouriteData();
-        // showData();
     }
     return {
         init:init,

@@ -36,7 +36,7 @@ form{
 }
 .container2 {
     width: 70%;
-    /* height: fit-content; */    /* It will make the height according to the no. of new row */
+        /* It will make the height according to the no. of new row */
     padding: 5px;
     margin: 15px;               
     border-top: 3px solid rgb(116, 100, 100);    
@@ -47,8 +47,7 @@ form{
 }
 
 h2 {
-    /* text-shadow: 3px 2px 1px grey; */
-    /* font-size: 30px; */
+    
     font-size: calc(16px + 2vw);
     text-align: center;
     text-decoration: underline;
@@ -93,11 +92,9 @@ input::placeholder {
 .redStar::after{
     content: " *";
     color: red;
-    /* font-size:calc(2px + 1vw) ; */
 }
 .err-msg {
     font-size: calc(2px + 1vw);
-    /* font-size: 5px; */
     font-family:sans-serif;
     font-style: italic;
     margin-left: 3%;
@@ -137,7 +134,6 @@ label{
 /* to make each input field in center */
 
 .storage {
-    /* font-size: 20px; */
     font-size: calc(2px + 1.5vw);
     height: 35px;
     border-radius: 8px;
@@ -146,7 +142,6 @@ label{
     background: linear-gradient(45deg,#4f1919,#ff3333);
     
     margin-bottom: calc(3px + 1vw);
-    /* border: 1px solid rgb(10, 145, 111); */
     box-shadow: 0px 0px 4px 4px rgb(128, 119, 119);
 }
 .storage:hover {
@@ -194,7 +189,6 @@ table:hover {
         background-color: #b0b8b8;
     }
     tr:nth-child(even) {
-        /* background-color: rgb(97, 87, 87); */
         background-color: black;
     }
 }
@@ -318,74 +312,6 @@ table:hover {
 .errorContent>p {
     font-size: calc(3px + 1vw);
 }
-
-
-/* .deletePopup {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%) scale(1);
-    background-color:bisque;
-    color: black; 
-    box-shadow: 10px 10px 5px rgb(138, 135, 135);
-    width: 25%;
-    height: calc(30px + 15vw);
-    z-index: 2;
-}
-.deleteContent {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: calc(1px + 0.5vw);
-    padding: calc(1px + 0.5vw);
-}
-#deleteIcon {
-    position: relative;
-    left: 35%;
-    font-size: calc(5px + 5vw);
-    margin: calc(1px + 0.2vw);
-    padding: calc(1px + 0.2vw);
-}
-.deleteContent>h4,p {
-    padding: calc(1px + 0.5vw);
-}
-.deleteContent>p {
-    font-size: calc(3px + 1vw);
-}
-.btn {
-    border: none;
-    margin: 3px;
-}
-#btnCancelPopup {
-    background-color: beige;
-    margin: 3px;
-    display: flex;
-    float: right;
-    padding: calc(1px + 0.5vw);
-    border: none;
-    border-radius: 15px;
-    border: 2px solid grey;
-    box-shadow: 0 9px #999;
-}
-#btnCancelPopup:active {
-    box-shadow: 0 5px #555151;
-    transform: translateY(4px);
-}
-#btnDeletePopup {
-    background-color: #ff3333;
-    margin: 3px;
-    display: flex;
-    float: right;
-    padding: calc(1px + 0.5vw);
-    border: none;
-    border-radius: 15px;
-    border: 2px solid grey;
-    box-shadow: 0 9px #999;
-}
-#btnCancelPopup:active {
-    box-shadow: 0 5px #555151;
-    transform: translateY(4px);
-}  */
-
 .showPopup {
     display: block;
 }
