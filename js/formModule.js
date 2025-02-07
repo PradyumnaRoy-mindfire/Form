@@ -1,40 +1,47 @@
 var formModule = (function($){
     var formData = {"fname":"","lname":"","pass":"","phno":"","email":"","gender":"","address":"","pin":"","terms":""};
     var i = 0;
-    var localStorageArray = []
+    //email array will keep the unique entries 
     var emailArray = []
     function init() {
+        var sessionStorageFlag = false;
         
         validationModule.validation(formData);
-        let storage = localStorage;
         async function submit() {
+                //for localstorage
             $("#localstorage").on("click",(e)=> {
                 e.preventDefault();
-                
-                storage = localStorage;
+
+                let isValid = false;
+
                 let data = readFormData();
-                storedInLocalStorage(data);
-                let isValid = validationModule.validation(data);
-    
+                
+                isValid = validationModule.validation(data);
+
                 $(document).on('isValidUpdated', function(event, newIsValid) {
                     isValid = newIsValid;
                     console.log("isvalid updated",isValid);
                 });
+                // console.log(JSON.parse(localStorage.getItem("emailArray"))?.indexOf(data.email),"Exixting email",data.email);
+
+               
                 console.log("Before going to the login page",validationModule.validation(data));
-                if(isValid) {
+                if(isValid == true) {
+                    storedInLocalStorage(data);
                     pageModule.displaySubmitPopup('.storagePopup');
+                    resetForm();
                     setTimeout(function(){
                         window.location.assign("./login.html") ;    
-                    },1000)
+                    },5000)
                 }
                 
                 
             });
+                //for sessionstorage
             $("#sessionstorage").on("click",(e)=> {
                 e.preventDefault();
-                storage = sessionStorage;
                 let data = readFormData()
-                storedInSessionStorage(data);
+                
                 let isValid = validationModule.validation(data);
     
                 $(document).on('isValidUpdated', function(event, newIsValid) {
@@ -43,10 +50,12 @@ var formModule = (function($){
                 });
                 console.log("Before going to the login page",validationModule.validation(data));
                 if(isValid) {
+                    storedInSessionStorage(data);
                     pageModule.displaySubmitPopup('.storagePopup');
+                    resetForm();
                     setTimeout(function(){
                         window.location.assign("./login.html") ;    
-                    },1000)
+                    },1000);
                 }
             });
     
@@ -54,12 +63,16 @@ var formModule = (function($){
             $(".login").on('click',function(e) {
                 console.log("Login bton clicked");
                 e.preventDefault();
+                let storage = localStorage.getItem('storage');
                 login(storage);
             });
             
         }
         submit()
-        if(localStorage.getItem("loginProfileEmail") != null) {
+        console.log("zsession strorage flag",sessionStorageFlag);
+        if(localStorage.getItem("loginProfileEmail") != null || sessionStorageFlag == true) {
+            let storage = localStorage.getItem('storage');
+            sessionStorageFlag = false;
             profile(storage);
         }
         
@@ -92,7 +105,11 @@ var formModule = (function($){
             return formData;
         }
         function storedInLocalStorage(formData) {
+            console.log(JSON.parse(localStorage.getItem("formDataArray")));
+            let localStorageArray = localStorage.getItem("formDataArray") == null ? [] : JSON.parse(localStorage.getItem("formDataArray"));  //if null then it will create a empty array otherwise push to the existing array
             localStorageArray.push(formData);
+            emailArray = JSON.parse(localStorage.getItem("emailArray"));
+            emailArray = emailArray==null?[]:emailArray;
             emailArray.push(formData.email);
             localStorage.setItem("emailArray",JSON.stringify(emailArray));
             localStorage.setItem("formDataArray",JSON.stringify(localStorageArray));
@@ -111,35 +128,45 @@ var formModule = (function($){
         
     }
     function login(storage) {
-        console.log("Login fuction called",storage==localStorage);
         let loginValid = true;
         let inputEmail = $("#loginEmail").val();
+        
         let inputPass = $("#loginPass").val();
         let localEmail = "";
         let localPass = "";
+        let storageFlag = false;
         let dataArray = JSON.parse(localStorage.getItem("formDataArray"));
-        dataArray.forEach(element => {
+        dataArray?.forEach(element => {
             if(inputEmail == element.email) {
                 localEmail = element.email;
                 localPass = element.pass;
+                storageFlag = true;
                 localStorage.setItem("loginProfileEmail",element.email);
+                localStorage.setItem("storage",'localStorage');
             }
         });
-        
+
         let sessionEmail = sessionStorage.getItem('email');
         let sessionPass = sessionStorage.getItem('pass');
+
+              //to know if the entered data is of session
+        if(storageFlag == false && sessionEmail == inputEmail) {
+            localStorage.setItem("storage",'sessionStorage');
+            sessionStorageFlag = true;
+        }
+        
         
       
-        if(localEmail != inputEmail && sessionEmail != inputEmail){
-            console.log("Email doesnot matched");
-            $('#loginEmail').keyup(function() {
-                $('#loginEmail-err').text("**Email is not valid...");
-                $("#loginEmail").addClass('errorEffect');
-            });
-            loginValid = false;
-        }
+        // if(localEmail != inputEmail && sessionEmail != inputEmail){
+        //     console.log("Email doesnot matched");
+        //     $('#loginEmail').keyup(function() {
+        //         $('#loginEmail-err').text("**Email is not valid...");
+        //         $("#loginEmail").addClass('errorEffect');
+        //     });
+        //     loginValid = false;
+        // }
         //If localstorage email is input but localStorage password is not provided
-        if((storage == localStorage && localPass != inputPass) || (storage == sessionStorage && sessionPass != inputPass)){
+        if((storage == "localStorage" && localPass != inputPass) || (storage == "sessionStorage" && sessionPass != inputPass)){
             console.log("Pass doesnot matched");
             $('#loginPass').keyup(function() {
                 $('#loginPass-err').text("**Password does not match...");
@@ -177,20 +204,30 @@ var formModule = (function($){
         let address = "";
         let email = "";
         let phno = "";
-        let  i = 0;
-        formDataArray = JSON.parse(localStorage.getItem("formDataArray"));
-        let loginProfileEmail = localStorage.getItem("loginProfileEmail");
-        //In for-each lopp we can't use 'break' statement
-        for(i = 0;i < formDataArray.length;i++) {
-            if(loginProfileEmail == formDataArray[i].email) {
-                email = formDataArray[i].email;
-                fname = formDataArray[i].fname;
-                lname = formDataArray[i].lname;
-                address = formDataArray[i].address;
-                phno = formDataArray[i].phno;
-                break;
+        if(storage == 'localStorage') {
+            let  i = 0;
+            formDataArray = JSON.parse(localStorage.getItem("formDataArray"));
+            let loginProfileEmail = localStorage.getItem("loginProfileEmail");
+            //In for-each lopp we can't use 'break' statement
+            for(i = 0;i < formDataArray.length;i++) {
+                if(loginProfileEmail == formDataArray[i].email) {
+                    email = formDataArray[i].email;
+                    fname = formDataArray[i].fname;
+                    lname = formDataArray[i].lname;
+                    address = formDataArray[i].address;
+                    phno = formDataArray[i].phno;
+                    break;
+                }
             }
+        } 
+        else {
+            fname = sessionStorage.getItem('fname');
+            lname = sessionStorage.getItem('lname');
+            email = sessionStorage.getItem('email');
+            phno = sessionStorage.getItem('phno');
+            address = sessionStorage.getItem('address');
         }
+        
 
 
         $("#fnameProfile").val(fname);
@@ -204,17 +241,51 @@ var formModule = (function($){
         })
         $("#btnUpdate").on("click",function(e){
             e.preventDefault();
-            let newFormData = {
+
+            //After updation hide the update button
+            setTimeout(function(){
+                $('.update').hide();
+            },500)
+            let updatedFormData = {
                 'fname': $("#fnameProfile").val(),
                 'lname': $("#lnameProfile").val(),
                 'address': $("#addressProfile").val(),
                 'email': $("#emailProfile").val(),
                 'phno': $("#phnoProfile").val()
             }
-            formDataArray[i] = newFormData;
-            localStorage.setItem("formDataArray",JSON.stringify(formDataArray));
+            if(storage == 'localStorage') {
+                formDataArray[i] = updatedFormData;
+                localStorage.setItem("formDataArray",JSON.stringify(formDataArray));
+            } else {
+                sessionStorage.setItem("fname",updatedFormData.fname);
+                sessionStorage.setItem("lname",updatedFormData.lname);
+                sessionStorage.setItem('phno',updatedFormData.phno);
+                sessionStorage.setItem('email',updatedFormData.email);
+                sessionStorage.setItem('address',updatedFormData.address);
+            }
+           
             pageModule.displaySubmitPopup(".updatePopup");
         })
+
+        $(".logoutIcon").on('click',function(){
+            $('.container').addClass('doBlur');
+            pageModule.displayLogoutPopup(".logoutPopup");
+            $("#btnLogoutPopup").on('click',function(){
+                $(".logoutPopup").removeClass('showPopup');
+                $('.container').removeClass('doBlur');
+                //reseting form before leaving
+                $("#profile-form")[0].reset();
+                setTimeout(function(){
+                    window.location.assign("./login.html");
+                },500);
+            })
+            $("#btnCancelPopup").on('click',function(){
+                $(".logoutPopup").removeClass('showPopup');
+                $('.container').removeClass('doBlur');
+            })
+            
+        })
+
         favouriteModule.readFavouriteData();
         
     }

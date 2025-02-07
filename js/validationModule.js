@@ -154,14 +154,22 @@ var validationModule = (function(){
         
 
         if(formData.fname == "" || formData.pass == "" || formData.phno == "" || formData.email == ""  || formData.pin == "" || formData.terms == false){
+            pageModule.displaySubmitPopup('.errorPopup')
             isValid = false;
         }
+
+        //if email is already registered
+        if(JSON.parse(localStorage.getItem("emailArray"))?.indexOf(formData.email) != -1){
+            emailErr.text("**Email is already registered...");
+            $("#email").addClass('errorEffect');
+            isValid = false;
+        }
+
         $(document).trigger('isValidUpdated',isValid); 
         
         return isValid
      
     }
-
 
 
 
@@ -205,7 +213,7 @@ var validationModule = (function(){
     }
 
     function init(){
-        validation(formData)
+        validation(formData);
     }
     return {
         init:init,

@@ -9,9 +9,12 @@ var favouriteModule = (function($){
         $(".dropdown-form").toggle();
     })
 
+    var loginProfileEmail = localStorage.getItem('loginProfileEmail');
+    var i = 0;
+
     function readFavouriteData() {
-        let i = 0;
-        let arr = []
+        let formDataArray = JSON.parse(localStorage.getItem('formDataArray'));
+        
         $(".Favourite-btn").on('click',function(e) {
             e.preventDefault();
             
@@ -22,25 +25,48 @@ var favouriteModule = (function($){
                 data = {
                     [name] : item               //To use a variable as key we have take []
                 }
-                data = JSON.stringify(data)
-                arr.push(data)
-                localStorage.setItem('favourite',JSON.stringify(arr));
+                for(i = 0;i < formDataArray.length;i++) {
+                    if(loginProfileEmail == formDataArray[i].email){
+                        profileFormData = JSON.parse(localStorage.getItem('formDataArray'))[i];
+                        let favouriteArr = profileFormData.favourite == null?[]:profileFormData.favourite;
+                        favouriteArr.push(data)
+                        profileFormData.favourite = favouriteArr;
+                        formDataArray[i] = profileFormData;
+                        localStorage.setItem('formDataArray',JSON.stringify(formDataArray));
+                        break;
+                    }
+                }
+                
                 $("#favouriteForm")[0].reset();
             }
-        });
-        $(".Favourite-btn").on('click',function(){
+            //to show the cuurent added favourite
             $('.temp')?.remove();
-            if(arr != null)
-                showData();
-        })
+            if(JSON.parse(localStorage.getItem('formDataArray'))[i].favourite != null)
+                showData(i);
+        });
+        
+            //to show the previous favourite data
+        $(".favouriteIcon").on('click',function(){
+            let formDataArray = JSON.parse(localStorage.getItem('formDataArray'));
+            for(i = 0;i < formDataArray.length;i++){
+                if(formDataArray[i].email == localStorage.getItem('loginProfileEmail')){
+                    $('.temp')?.remove();
+                    let favouriteArr = formDataArray[i].favourite;
+                    if(favouriteArr != null){
+                        showData(i);
+                        break;
+                    }
+                }
+            }
+        });
+
         
     }
 
-    function showData() {
-       let arr = localStorage.getItem('favourite');
-       arr = JSON.parse(arr);
-       arr?.forEach(element => {
-            element = JSON.parse(element)   //Stringify the whole array
+    function showData(i) {
+       let formDataArray = JSON.parse(localStorage.getItem('formDataArray'));
+       let favouriteArr = formDataArray[i]?.favourite;
+       favouriteArr?.forEach(element => {
             var newRow = $("<tr class='temp' >''</tr>");
             for(let key in element) {
                 let name = key;
@@ -54,16 +80,17 @@ var favouriteModule = (function($){
        });
        
        $(".btnDelete").on('click',function() {
-            let arr = localStorage.getItem('favourite');
-            arr = JSON.parse(arr);
+            let formDataArray = JSON.parse(localStorage.getItem('formDataArray'));
+            let favouriteArr = formDataArray[i]?.favourite;
             var row = $(this).closest('tr'); // Get the row
             var rowIndex = row.index();
 
-            let rr = arr.splice(rowIndex,rowIndex+1);
-            console.log(arr);
-            localStorage.setItem('favourite',JSON.stringify(arr));
+            let rr = favouriteArr.splice(rowIndex,rowIndex+1);   //delete the row from favourite array
+            console.log(favouriteArr);
+            formDataArray[i].favourite = favouriteArr;
+            localStorage.setItem('formDataArray',JSON.stringify(formDataArray));
 
-           $(this).closest('tr').remove();
+           $(this).closest('tr').remove();   //delete the row from page
        })
     }
     
@@ -71,7 +98,7 @@ var favouriteModule = (function($){
     function init(){
         
         readFavouriteData();
-        showData();
+        // showData();
     }
     return {
         init:init,

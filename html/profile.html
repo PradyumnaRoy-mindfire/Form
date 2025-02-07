@@ -20,9 +20,11 @@
                     <i class="fa-solid fa-circle-user fa-flip fa-2xl" style="color: #f37932;"></i>
                  </div>
                  <h3>My Profile </h3>
+                        <!--For Favourite Item -->
                  <div class="favourite">
-                    <i class="fa-regular fa-heart fa-lg favouriteIcon" style="color: #f53d1c;" title="Favourite"></i>
+                    <i class="fa-regular fa-heart fa-xl favouriteIcon" style="color: #f53d1c;" title="Favourite"></i>
                  </div>
+
                 <div class="inpDiv" id="username">
                     <i class="fa-solid fa-user  fa-lg icon"></i>
                     <input type="text" name="" id="fnameProfile">
@@ -43,7 +45,11 @@
                     <i class="fa-solid fa-location-dot fa-lg icon"></i>
                     <input type="text" name="" id="addressProfile">
                 </div>
-    
+
+                <!-- for lo g out -->
+                <div class="logout">
+                    <i class="fa-solid fa-right-from-bracket fa-lg logoutIcon" style="color: #f53d1c;" title="Log out"></i>
+                 </div>
     
                 <div class="update inpDiv">
                     <input type="submit" value="Update" id="btnUpdate">
@@ -93,7 +99,20 @@
             <p>Your Data is <b>Updated Successfully</b>...</p>
         </div>
     </div>
-  
+
+   
+    
+    <div class="logoutPopup">
+        <div class="logoutContent">
+            <span><i class="fa-solid fa-circle-exclamation fa-shake" id="logoutWarnIcon"style="color: #f56224;" title="Logout"></i></i></span>
+            <h4>Log Out</h4>
+            <p>Are you sure, you want to log out?</p>
+            <div class="btn">
+                <button id="btnLogoutPopup"><b>Yes,Logout</b></button>
+                <button id="btnCancelPopup"><b>CENCEL</b></button>
+            </div>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> 
     <script src="../js/script.js"></script>

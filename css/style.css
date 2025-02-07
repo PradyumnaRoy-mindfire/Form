@@ -269,7 +269,7 @@ table:hover {
 }
 
 
-.storagePopup {
+.storagePopup,.errorPopup {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -284,12 +284,22 @@ table:hover {
     z-index: 2;
 }
 
-.storageContent {
+.storageContent,.errorContent {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: calc(1px + 0.5vw);
     padding: calc(1px + 0.5vw);
 }
+
+
+
 #successIcon {
+    position: relative;
+    left: 35%;
+    font-size: calc(5px + 5vw);
+    margin: calc(1px + 0.2vw);
+    padding: calc(1px + 0.2vw);
+}
+#blankErrorIcon{
     position: relative;
     left: 35%;
     font-size: calc(5px + 5vw);
@@ -302,16 +312,22 @@ table:hover {
 .storageContent>p {
     font-size: calc(3px + 1vw);
 }
-        /* FOr delete pop up */
-.deletePopup {
+.errorContent>h4,p {
+    padding: calc(1px + 0.5vw);
+}
+.errorContent>p {
+    font-size: calc(3px + 1vw);
+}
+
+
+/* .deletePopup {
     display: none;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%) scale(1);
     background-color:bisque;
-    /* display: none; */
-    color: black;
+    color: black; 
     box-shadow: 10px 10px 5px rgb(138, 135, 135);
     width: 25%;
     height: calc(30px + 15vw);
@@ -368,7 +384,7 @@ table:hover {
 #btnCancelPopup:active {
     box-shadow: 0 5px #555151;
     transform: translateY(4px);
-}
+}  */
 
 .showPopup {
     display: block;

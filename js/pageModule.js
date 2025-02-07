@@ -105,7 +105,9 @@ var pageModule = (function($){
             $(".container").removeClass("doBlur")
         },1000)
     }
-
+    function displayLogoutPopup(place) {
+        $(`${place}`).addClass('showPopup');
+    }
     
     function init() {
         hideError();
@@ -115,5 +117,6 @@ var pageModule = (function($){
     return {
         init:init,
         displaySubmitPopup:displaySubmitPopup,
+        displayLogoutPopup:displayLogoutPopup
     }
 })(jQuery)
