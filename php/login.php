@@ -11,6 +11,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <?php
+        $jsonFile = '/var/www/html/test/Form/data.json';
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = $_POST['email'];
+            $pass = $_POST['pass'];
+            // echo $email," ",$pass;
+            $jsonData = file_get_contents($jsonFile);
+            $data = json_decode($jsonData, true);
+            
+            $length = sizeof($data);
+            for($i = 0;$i < $length;$i++) {
+                if($data[$i]['email'] == $email && $data[$i]['pass'] == $pass) {
+                    //store the profile data for showing later
+                    $profileJsonFile = '/var/www/html/test/Form/profileData.json';
+                    $profileData = array(
+                        'fname' => $data[$i]['fname'],
+                        'lname' => $data[$i]['lname'],
+                        'phno' => $data[$i]['phno'],
+                        'email' => $data[$i]['email'],
+                        'address' => $data[$i]['address'],
+                        'photo' => $data[$i]['photo']
+                        
+                    );
+                    //it will not be append as a single user can login at a time
+                    $jsonData = json_encode($profileData,JSON_PRETTY_PRINT);
+                    file_put_contents($profileJsonFile,$jsonData);
+                    header("Location: http://localhost/test/Form/php/profile.php",true,301);
+                    exit();
+                }
+            }
+            // echo var_dump($data);
+        }
+    ?>
+
      
 
 </head>
@@ -21,8 +56,8 @@
         <div class="container1">
             <h2>Login Form</h2>
             <div class="form-container">
-                <form action="" id="form">
-                   
+
+                <form action="/test/Form/php/login.php" id="form" method="post">
                     <div class="input-name">
                         <label for="email" class="redStar">Email</label>
 
@@ -42,7 +77,7 @@
                         <label for="password" class="redStar">Password</label>
 
                         <div class="wrapper">
-                            <input type="password" name="password" placeholder="Password" class="inp-typ1 redStar " id="loginPass">
+                            <input type="password" name="pass" placeholder="Password" class="inp-typ1 redStar " id="loginPass">
                               <i class="fas fa-eye password-toggle-icon eye" ></i>
                         </div>
 
@@ -57,7 +92,7 @@
                         <input type="submit" value="Login" class="login">
                     </div>
                     <div class="input-name" id="account">
-                        <span>Don't have an account?<a href="registration.html">Register now!!</a></span>
+                        <span>Don't have an account?<a href="registration.php">Register now!!</a></span>
                     </div>
                 </form>
             </div>

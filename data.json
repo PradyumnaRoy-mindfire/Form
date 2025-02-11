@@ -1,0 +1,37 @@
+[
+    {
+        "fname": "Pradyumna",
+        "lname": "Roy",
+        "pass": "rr",
+        "phno": "06297496905",
+        "email": "roypradyumna7@gmail.com",
+        "gender": "",
+        "address": "jagamara,Khandagiri",
+        "pin": "751030",
+        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67ab1201b6fc4_Photo_Pradyumna.jpg",
+        "terms": false,
+        "favourite": [
+            {
+                "name": "Car",
+                "item": "Defender"
+            },
+            {
+                "name": "Color ",
+                "item": "Red"
+            }
+        ]
+    },
+    {
+        "fname": "Pradyumna",
+        "lname": "Roy",
+        "pass": "dd",
+        "phno": "06297496905",
+        "email": "roypradyumna7@gmail.com",
+        "gender": "",
+        "address": "jagamara,Khandagiri",
+        "pin": "751030",
+        "photo": "",
+        "terms": false,
+        "favourite": []
+    }
+]

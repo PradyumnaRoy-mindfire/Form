@@ -10,6 +10,79 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <?php
+
+    // echo $_SERVER['REQUEST_METHOD']=='POST'."Post";   doubt: this is not giving any o/p why 
+    
+
+    $jsonFile = '/var/www/html/test/Form/data.json';
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
+        $fname = $_POST['fname'];
+        $lname = $_POST['lname'] ;
+        $pass = $_POST['pass'] ;
+        $phno = $_POST['phno'] ;
+        $email = $_POST['email'] ;
+        $gender = isset($_POST['gender']) ? $_POST['gender']:"";
+        $address = $_POST['address'] ;
+        $pin = $_POST['pin'] ;
+        $terms = isset($_POST['terms']) ? true : false;
+            //For photo
+        $photoPath = "";
+            // checking if the photo is uploaded or not
+        if(isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
+            $photo = $_FILES['photo'];
+                // Folder where to save
+            $uploadDir = "/var/www/html/test/Form/profilePhoto/";
+                //Creating unique name for each photo
+            $photoName  = uniqid()."_".basename($photo['name']);
+            $photoTmpPath = $photo['tmp_name'];
+            $photoPath = $uploadDir . $photoName;
+
+            move_uploaded_file($photoTmpPath, $photoPath);
+        }
+        $formData = array(
+            'fname' => $fname,
+            'lname' => $lname,
+            'pass' => $pass,
+            'phno' => $phno,
+            'email' => $email,
+            'gender' => $gender,
+            'address' => $address,
+            'pin' => $pin,
+            'photo' => $photoPath,
+            'terms' => $terms,
+            'favourite' => []
+        );
+        echo $formData;
+            //if file exist 
+        if (file_exists($jsonFile)) {
+            $jsonData = file_get_contents($jsonFile);
+            $data = json_decode($jsonData, true); 
+        } else {
+            // If the file does not exist, create an empty array
+            $data = array(); 
+        }
+            //append the formdata to the data array
+        $data[] = $formData;
+
+    
+        // Encode the data back into a JSON format
+        $jsonData = json_encode($data, JSON_PRETTY_PRINT);
+        // echo $jsonData;
+
+        // Save the new data into the JSON file
+        file_put_contents($jsonFile, $jsonData);
+
+        
+        echo "Registration successful";
+            // location will came back to this page itself ,it prevents from storing data in to json file while reloading
+        header("Location: http://localhost/test/Form/php/login.php",true,301);
+        exit();
+    }
+    ?>
+
+
      
 
 </head>
@@ -20,9 +93,9 @@
         <div class="container1">
             <h2>Registration Form</h2>
             <div class="form-container">
-                <!-- For Javascript autostorage() is required -->
-                <!-- <form action="" id="form" onstorage="autostorage(event)"> -->  
-                <form action="" id="form">
+
+                    <!-- entype is encryption type used for security purpose -->
+                <form  id="form" action="/test/Form/php/registration.php" method="POST" enctype="multipart/form-data">  
                     <div class="input-name">
                         <label for="fname" class="redStar">First Name</label>
 
@@ -53,7 +126,7 @@
                         <label for="password" class="redStar">Password</label>
 
                         <div class="wrapper">
-                            <input type="password" name="password" placeholder="Password" class="inp-typ1 redStar" id="pass">
+                            <input type="password" name="pass" placeholder="Password" class="inp-typ1 redStar" id="pass">
                               <i class="fas fa-eye password-toggle-icon eye"></i>
                         </div>
 
@@ -75,7 +148,7 @@
                             
                         </select>
                         <div class="wrapper">
-                            <input type="number" name="phoneNumber" placeholder="eg:123456" class="inp-typ1 fullWidth" id="phno">
+                            <input type="number" name="phno" placeholder="eg:123456" class="inp-typ1 fullWidth" id="phno">
                             <i class="fa-solid fa-circle-info warning" style="color: #FFD43B;" tabindex="0" id="phno-warn"></i>
                         </div>
 
@@ -112,7 +185,7 @@
 
                     <div class="input-name">
                         <label for="">Address</label>
-                        <input type="text" placeholder="Address" class="inp-addr" id="address">
+                        <input type="text" placeholder="Address" class="inp-addr" id="address" name="address">
                     </div>
 
                     <div class="input-name">
@@ -128,6 +201,10 @@
                         <span class="recomandation" id="pin-recom">Pin code has only 5 or 6 digit...</span>
                     </div>
 
+                    <div class="input-name">
+                        <label for="photo">Upload Photo</label>
+                        <input type="file" name="photo" id="photo" accept="image/*">
+                    </div>
 
                     <div id="check">
                         <input type="checkbox" name="terms" id="terms">
@@ -137,9 +214,10 @@
                         <p><span id="terms-err" class="err-msg"></span></p>
                     </div>
 
+                    
+
                     <div class="input-name">
-                        <input type="submit" value="Add Data to Local Storage" class="storage" id="localstorage">
-                        <input type="submit" value="Add Data to Session Storage" class="storage" id="sessionstorage">
+                        <input type="submit" value="Submit" class="submit" id="submit" name="submit">
                     </div>
 
                 </form>
@@ -150,8 +228,8 @@
         
     </div>
 
-    <div class="storagePopup">
-        <div class="storageContent">
+    <div class="submitPopup">
+        <div class="submitContent">
             <span><i class="fa-regular fa-circle-check fa-beat" style="color: #31ed47;" id="successIcon"></i></span>
             <h4>THANK YOU</h4>
             <p>Your data has been saved successfully...</p>
