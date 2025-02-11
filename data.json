@@ -22,16 +22,16 @@
         ]
     },
     {
-        "fname": "Pradyumna",
-        "lname": "Roy",
-        "pass": "dd",
-        "phno": "06297496905",
-        "email": "roypradyumna7@gmail.com",
-        "gender": "",
-        "address": "jagamara,Khandagiri",
+        "fname": "Debangan",
+        "lname": "Chakraborty",
+        "pass": "dc",
+        "phno": "95755158663",
+        "email": "dc@gmail.com",
+        "gender": "Male",
+        "address": "jagamara",
         "pin": "751030",
-        "photo": "",
-        "terms": false,
+        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67ab23c1ab078_whiteBackground.jpg",
+        "terms": true,
         "favourite": []
     }
 ]
