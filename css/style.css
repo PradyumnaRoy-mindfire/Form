@@ -320,6 +320,6 @@ table:hover {
 }
 #photo {
     margin: 5px 0px 10px 10px;
-    font-size: calc(1px + 0.5vw);
+    font-size: calc(1px + 1.1vw);
     border-radius: 10px;
 }

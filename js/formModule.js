@@ -4,28 +4,24 @@ var formModule = (function($){
     //email array will keep the unique entries 
     var emailArray = []
     function init() {
-        var sessionStorageFlag = false;
         
-        validationModule.validation(formData);
+        validationModule.validation();
         async function submit() {
-            // isValid = validationModule.validation(data);
+            
+            // isValid = validationModule.validation();
 
-            // $(document).on('isValidUpdated', function(event, newIsValid) {
-            //     isValid = newIsValid;
-            //     console.log("isvalid updated",isValid);
-            // });
+           
 
-               
-            // if(isValid == true) {
-            //     pageModule.displaySubmitPopup('.submitPopup');
-            //     resetForm();
-            //     setTimeout(function(){
-            //         window.location.assign("./login.php") ;    
-            //     },1000)
-            // }
+            // $("#submit").on('click',function() {
+            //     if(isValid == true) {
+            //         pageModule.displaySubmitPopup('.submitPopup');
+            //         // resetForm();
+            //         // $('#submit').prop("disabled", false );
+            //     }
+            // })
+            
                 
                 
-            // });
         
     
             
@@ -40,33 +36,7 @@ var formModule = (function($){
         
         
 
-        function readFormData() {
-            formData.fname = $('#fname').val();
-            formData["lname"] = $('#lname').val();
-            formData["pass"] = $('#pass').val();
-            formData["phno"] = $('#phno').val();
-            formData["email"] = $('#email').val();
-                //For gender 
-            if($('#male').prop('checked')) {
-                formData.gender = "Male";
-            }
-            else if($('#female').prop('checked')){
-                formData.gender = "Female";
-            }
-            else if($('#others').prop('checked')){
-                formData.gender = "Others";
-            }
-
-
-            formData["address"] = $('#address').val();
-            formData["pin"] = $('#pin').val();
-            formData["terms"] = $('#terms')[0].checked;
-            formData.index = i++;  
-            console.log(formData);
-             
-
-            return formData;
-        }
+       
       
         
     }

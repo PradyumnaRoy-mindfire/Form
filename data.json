@@ -33,5 +33,18 @@
         "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67ab23c1ab078_whiteBackground.jpg",
         "terms": true,
         "favourite": []
+    },
+    {
+        "fname": "Pradyumna",
+        "lname": "Roy",
+        "pass": "Roy@9734",
+        "phno": "6297496905",
+        "email": "roypradyumna7@gmail.com",
+        "gender": "",
+        "address": "jagamara,Khandagiri",
+        "pin": "751030",
+        "photo": "",
+        "terms": true,
+        "favourite": []
     }
 ]

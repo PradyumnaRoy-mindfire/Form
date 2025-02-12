@@ -84,7 +84,6 @@
         // }
         if(isset($_GET['id'])) {
             $id = $_GET['id'];
-            echo $_GET['id'],"iddd";
             $k = 0;
             for( ;$k < sizeof($data);$k++) {
                 if($data[$k]['email'] == $profileData['email'])
@@ -94,7 +93,7 @@
             unset($favouriteDataArray[$id-1]);
             // echo var_dump($favouriteDataArray);
             $data[$k]['favourite'] = $favouriteDataArray;
-            echo $favouriteData,"fav array";
+            // echo $favouriteData,"fav array";
             $jsonData = json_encode($data,JSON_PRETTY_PRINT);
             file_put_contents($jsonFile,$jsonData);
         }

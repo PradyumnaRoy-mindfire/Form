@@ -1,6 +1,6 @@
 var validationModule = (function(){
     
-    function validation(formData) {
+    function validation() {
         let fnameErr = $('#fname-err');
         let lnameErr = $('#lname-err');
         let passErr = $('#pass-err');
@@ -20,6 +20,7 @@ var validationModule = (function(){
         pinErr.text("");
         termsErr.text("");
 
+        
 
         let isValid = true;
 
@@ -37,15 +38,11 @@ var validationModule = (function(){
                 isValid = false;
             }
         });
+        console.log(isValid,"after name");
                 //Lastname validation
         $("#lname").keyup(function() {
             let enteredInput = $("#lname").val();
-            if(enteredInput == "") {
-                lnameErr.text( "**This field is required...");
-                $("#lname").addClass('errorEffect');
-                isValid = false;
-            }
-            else if(enteredInput.match(/\d/)){
+            if(enteredInput.match(/\d/)){
                 lnameErr.text( "**Last name should not contain any digit...");
                 $("#lname").addClass('errorEffect');
                 isValid = false;
@@ -54,9 +51,9 @@ var validationModule = (function(){
        
 
                 //Password  validation for registration page
-        if(passwordValidation("#pass",passErr) == null) {
-            isValid =  true
-        }
+        // if(passwordValidation("#pass",passErr) == null) {
+        //     isValid =  true
+        // }
           
 
 
@@ -152,12 +149,14 @@ var validationModule = (function(){
             }
         });
         
-
-        // if(formData.fname == "" || formData.pass == "" || formData.phno == "" || formData.email == ""  || formData.pin == "" || formData.terms == false){
-        //     pageModule.displaySubmitPopup('.errorPopup')
-        //     isValid = false;
-        // }
-
+        // $("#submit").on('click',function() {
+        //     if($('#fname').val() == ""){
+        //         pageModule.displaySubmitPopup('.errorPopup')
+        //         isValid = false;
+        //     }
+        // })
+        
+        console.log(isValid);
         //if email is already registered
         // $("#submit").on('click',function() {
         //     if(JSON.parse(localStorage.getItem("emailArray"))?.indexOf(formData.email) != -1){
@@ -168,9 +167,22 @@ var validationModule = (function(){
         // })
         
 
-        $(document).trigger('isValidUpdated',isValid); 
+        // $(document).trigger('isValidUpdated',isValid); 
+
+        // $(document).on('isValidUpdated', function(event, newIsValid) {
+        //     console.log("isvalid updated",isValid);
+        //     isValid = newIsValid;
+        //     if(isValid == true) {
+        //         $("#form").attr('method','POST');
+        //     }
+        // });
         
-        return isValid
+        // $(document).on(function(e) {
+        //     if(isValid == false ){
+        //         e.preventDefault();
+        //     }
+        // })
+        
      
     }
 
@@ -214,7 +226,7 @@ var validationModule = (function(){
             
         });
     }
-
+    
     function init(){
         validation(formData);
     }

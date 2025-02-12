@@ -10,14 +10,17 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    
+    
+    
     <?php
 
     // echo $_SERVER['REQUEST_METHOD']=='POST'."Post";   doubt: this is not giving any o/p why 
     
 
     $jsonFile = '/var/www/html/test/Form/data.json';
-    
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
+    include '../php/isEmpty.php';
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $isEmpty == false) {
         $fname = $_POST['fname'];
         $lname = $_POST['lname'] ;
         $pass = $_POST['pass'] ;
@@ -75,8 +78,9 @@
         file_put_contents($jsonFile, $jsonData);
 
         
-        echo "Registration successful";
+        // echo "Registration successful";
             // location will came back to this page itself ,it prevents from storing data in to json file while reloading
+
         header("Location: http://localhost/test/Form/php/login.php",true,301);
         exit();
     }
@@ -95,7 +99,7 @@
             <div class="form-container">
 
                     <!-- entype is encryption type used for security purpose -->
-                <form  id="form" action="/test/Form/php/registration.php" method="POST" enctype="multipart/form-data">  
+                <form  id="form" action="/test/Form/php/registration.php" method="post" enctype="multipart/form-data">  
                     <div class="input-name">
                         <label for="fname" class="redStar">First Name</label>
 
