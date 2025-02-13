@@ -15,7 +15,7 @@ var favouriteModule = (function($){
         $('.logoutIcon').on('click',function() {
             pageModule.displayLogoutPopup('.logputPopup')
             
-            window.location.assign("http://localhost/test/Form/php/login.php");
+            window.location.href = ("http://localhost/test/Form/php/login.php");
         });
        
     }

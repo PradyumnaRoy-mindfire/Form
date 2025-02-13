@@ -11,42 +11,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+   
 
     <?php
-        // $jsonFile = '/var/www/html/test/Form/data.json';
+        session_start();
+        
+        
         $jsonFile = $_SERVER['DOCUMENT_ROOT'].'/test/Form/data.json';
         
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $email = $_POST['email'];
             $pass = $_POST['pass'];
-            // echo $email," ",$pass;
             $jsonData = file_get_contents($jsonFile);
             $data = json_decode($jsonData, true);
             
             $length = sizeof($data);
             for($i = 0;$i < $length;$i++) {
                 if($data[$i]['email'] == $email && $data[$i]['pass'] == $pass) {
-                    //store the profile data for showing later
-                    // $profileJsonFile = '/var/www/html/test/Form/profileData.json';
-                    $profileJsonFile = $_SERVER['DOCUMENT_ROOT'].'/test/Form/profileData.json';
+
+                    $_SESSION['fname'] = $data[$i]['fname'];
+                    $_SESSION['lname'] = $data[$i]['lname'];
+                    $_SESSION['phno'] = $data[$i]['phno'];
+                    $_SESSION['email'] = $data[$i]['email'];
+                    $_SESSION['address'] = $data[$i]['address'];
+                    $_SESSION['photo'] = $data[$i]['photo'];
                     
-                    $profileData = array(
-                        'fname' => $data[$i]['fname'],
-                        'lname' => $data[$i]['lname'],
-                        'phno' => $data[$i]['phno'],
-                        'email' => $data[$i]['email'],
-                        'address' => $data[$i]['address'],
-                        'photo' => $data[$i]['photo']
-                        
-                    );
-                    //it will not be append as a single user can login at a time
-                    $jsonData = json_encode($profileData,JSON_PRETTY_PRINT);
-                    file_put_contents($profileJsonFile,$jsonData);
-                    header("Location: http://localhost/test/Form/php/profile.php",true,301);
+                    
+                    
+                    header("Location: http://localhost/test/Form/php/profile.php",true,302);   //301 for permanent redirection ,302 for temporary
                     exit();
                 }
             }
-            // echo var_dump($data);
         }
     ?>
 

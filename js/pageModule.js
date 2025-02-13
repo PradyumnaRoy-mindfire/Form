@@ -102,6 +102,21 @@ var pageModule = (function($){
 
         });
     }
+
+    //for update button
+    function updateButtontoggle() {
+        $(".profileInput").on('click',function(){
+            console.log("Botto");
+            $('.update').show();
+        })
+
+        $("#update").on('click',function(){
+            setTimeout(function(){
+                $('.update').hide();
+            },500);
+        })
+    }
+
     function displaySubmitPopup(place) {      //place is refering where to show after login or after registration
         $(".container").addClass("doBlur")
         $(`${place}`).show();
@@ -118,6 +133,7 @@ var pageModule = (function($){
         hideError();
         showHiddenPassword();
         recomandation();
+        updateButtontoggle();
     }
     return {
         init:init,

@@ -5,28 +5,7 @@ var formModule = (function($){
     var emailArray = []
     function init() {
         
-        // async function submit() {   
-        //     let isValid = validationModule.validation();
-        //     $(document).on('isValidUpdated', function(event, newIsValid) {
-        //         console.log("isvalid updated",isValid);
-        //         isValid = newIsValid;
-                
-        //     });
-            
-        //     $("#submit").on('click',function(e){
-               
-        //         if(isValid == false)
-        //             e.preventDefault(); 
-        //     })
-        //     // console.log(isValid,"formmodule");
-        //     // if(isValid == false){
-        //     //     $('#submit').attr('disabled',true);
-        //     // }
-            
-        // }   
-        // submit()
-        
-        
+       
 
        
       

@@ -195,7 +195,7 @@ tr:nth-child(even) {
 .update {
     width: 50%;
     margin: 0px auto;
-    /* display: none; */
+    display: none;
 }
 #btnUpdate{
     font-weight: bolder;

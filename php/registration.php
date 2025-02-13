@@ -14,16 +14,14 @@
     
     
     <?php
-
-    // echo $_SERVER['REQUEST_METHOD']=='POST'."Post";   doubt: this is not giving any o/p why 
+        //For empty field validations
+    include $_SERVER['DOCUMENT_ROOT'].'/test/Form/php/validation.php';
     
 
-    // $jsonFile = '/var/www/html/test/Form/data.json';
     $jsonFile = $_SERVER['DOCUMENT_ROOT'].'/test/Form/data.json';
     
-    include '../php/validation.php';
     
-    if ($_SERVER['REQUEST_METHOD'] == 'POST'  ) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $isEmpty == false ) {
         $fname = $_POST['fname'];
         $lname = $_POST['lname'] ;
         $pass = $_POST['pass'] ;
@@ -39,8 +37,8 @@
         if(isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
             $photo = $_FILES['photo'];
                 // Folder where to save
-            $uploadDir = "/var/www/html/test/Form/profilePhoto/";
-                //Creating unique name for each photo
+            $uploadDir = $_SERVER['DOCUMENT_ROOT'].'/test/Form/test/Form/profilePhoto/';
+                //creating unique name for each photo
             $photoName  = uniqid()."_".basename($photo['name']);
             $photoTmpPath = $photo['tmp_name'];
             $photoPath = $uploadDir . $photoName;
@@ -75,13 +73,10 @@
     
         // Encode the data back into a JSON format
         $jsonData = json_encode($data, JSON_PRETTY_PRINT);
-        // echo $jsonData;
 
         // Save the new data into the JSON file
         file_put_contents($jsonFile, $jsonData);
 
-        
-        // echo "Registration successful";
             // location will came back to this page itself ,it prevents from storing data in to json file while reloading
 
         header("Location: http://localhost/test/Form/php/login.php",true,301);
