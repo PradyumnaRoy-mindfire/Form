@@ -45,6 +45,11 @@ var pageModule = (function($){
             $("#fname-err").text("");
         });
        
+        $("#lname").on('input',function() {
+            $("#lname").removeClass('errorEffect');
+            $("#lname-err").text("");
+        });
+
         $("#pass").on('input',function() {
             $("#pass").removeClass('errorEffect');
             $("#pass-err").text("");

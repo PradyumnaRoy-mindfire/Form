@@ -1,4 +1,5 @@
 <?php 
+    $isValid = true;
     $isEmpty = false;
 
     $fname = $_POST['fname'];
@@ -39,5 +40,9 @@
         $termsErr = "This field is required...";
         $isEmpty = true;
     }
-    
+   
+
 ?>
+
+
+

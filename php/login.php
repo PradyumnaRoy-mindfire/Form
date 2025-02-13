@@ -13,7 +13,9 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <?php
-        $jsonFile = '/var/www/html/test/Form/data.json';
+        // $jsonFile = '/var/www/html/test/Form/data.json';
+        $jsonFile = $_SERVER['DOCUMENT_ROOT'].'/test/Form/data.json';
+        
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $email = $_POST['email'];
             $pass = $_POST['pass'];
@@ -25,7 +27,9 @@
             for($i = 0;$i < $length;$i++) {
                 if($data[$i]['email'] == $email && $data[$i]['pass'] == $pass) {
                     //store the profile data for showing later
-                    $profileJsonFile = '/var/www/html/test/Form/profileData.json';
+                    // $profileJsonFile = '/var/www/html/test/Form/profileData.json';
+                    $profileJsonFile = $_SERVER['DOCUMENT_ROOT'].'/test/Form/profileData.json';
+                    
                     $profileData = array(
                         'fname' => $data[$i]['fname'],
                         'lname' => $data[$i]['lname'],

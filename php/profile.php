@@ -11,15 +11,17 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <?php
-        $profileJsonFile = '/var/www/html/test/Form/profileData.json';
+        $profileJsonFile = $_SERVER['DOCUMENT_ROOT'].'/test/Form/profileData.json';
+
         $profileJsonData = file_get_contents($profileJsonFile);
         $profileData = json_decode($profileJsonData, true);
 
-        $jsonFile = '/var/www/html/test/Form/data.json';
+        $jsonFile = $_SERVER['DOCUMENT_ROOT'].'/test/Form/data.json';
+
         $jsonData = file_get_contents($jsonFile);
         $data = json_decode($jsonData,true);
         
-        if($_SERVER['REQUEST_METHOD'] == "POST") {
+        if($_SERVER['REQUEST_METHOD'] == "POST" && $isEmpty == false) {
             $fname = isset($_POST['fname']) ? $_POST['fname']:$profileData['fname'] ;
             $lname = isset($_POST['lname']) ? $_POST['lname']:$profileData['lname'] ;
             $email = isset($_POST['email']) ? $_POST['email']:$profileData['email'] ;

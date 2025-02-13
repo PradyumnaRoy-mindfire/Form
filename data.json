@@ -22,28 +22,54 @@
         ]
     },
     {
-        "fname": "Debangan",
-        "lname": "Chakraborty",
-        "pass": "dc",
-        "phno": "95755158663",
-        "email": "dc@gmail.com",
-        "gender": "Male",
-        "address": "jagamara",
-        "pin": "751030",
-        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67ab23c1ab078_whiteBackground.jpg",
-        "terms": true,
-        "favourite": []
-    },
-    {
         "fname": "Pradyumna",
         "lname": "Roy",
         "pass": "Roy@9734",
-        "phno": "6297496905",
+        "phno": "0629749690",
         "email": "roypradyumna7@gmail.com",
         "gender": "",
         "address": "jagamara,Khandagiri",
         "pin": "751030",
         "photo": "",
+        "terms": true,
+        "favourite": []
+    },
+    {
+        "fname": "Debangan",
+        "lname": "CHoudhury",
+        "pass": "Roy@9734",
+        "phno": "6285749625",
+        "email": "dc@gmail.com",
+        "gender": "",
+        "address": "jagamara,Khandagiri",
+        "pin": "751030",
+        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67ad792169570_testBack.jpg",
+        "terms": true,
+        "favourite": []
+    },
+    {
+        "fname": "Saswata",
+        "lname": "Sinhamohapatra",
+        "pass": "Roy@9734",
+        "phno": "7384435314",
+        "email": "sw@gmail.com",
+        "gender": "Male",
+        "address": "Bankura",
+        "pin": "738452",
+        "photo": "",
+        "terms": true,
+        "favourite": []
+    },
+    {
+        "fname": "Pabitra ",
+        "lname": "Roy",
+        "pass": "Roy@9734",
+        "phno": "6297274005",
+        "email": "pr@gmail.com",
+        "gender": "Male",
+        "address": "Barasat",
+        "pin": "700001",
+        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67ad7ebf1c279_Photo_Pradyumna.jpg",
         "terms": true,
         "favourite": []
     }

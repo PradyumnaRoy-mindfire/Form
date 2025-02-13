@@ -1,5 +1,5 @@
 var validationModule = (function(){
-    
+    let isValid = true;
     function validation() {
         let fnameErr = $('#fname-err');
         let lnameErr = $('#lname-err');
@@ -20,12 +20,9 @@ var validationModule = (function(){
         pinErr.text("");
         termsErr.text("");
 
-        
-
-        let isValid = true;
 
                 // firstname validation
-        $("#fname").keyup(function() {
+        $("#fname").keyup(  function() {
             let enteredInput = $("#fname").val();
             if(enteredInput == "") {
                 fnameErr.text( "**This field is required...");
@@ -38,7 +35,6 @@ var validationModule = (function(){
                 isValid = false;
             }
         });
-        console.log(isValid,"after name");
                 //Lastname validation
         $("#lname").keyup(function() {
             let enteredInput = $("#lname").val();
@@ -51,50 +47,50 @@ var validationModule = (function(){
        
 
                 //Password  validation for registration page
-        // if(passwordValidation("#pass",passErr) == null) {
-        //     isValid =  true
-        // }
+        if(passwordValidation("#pass",passErr) == null) {
+            isValid =  true
+        }
           
 
 
 
         // //email validation
-        // $('#email').keyup(function(){
-        //     let emailRegx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]/
-        //     let enteredInput = $("#email").val();
-        //     if(enteredInput == ""){
-        //         isValid = false;
-        //         emailErr.text( "**This field is required...");
-        //         $("#email").addClass('errorEffect');
-        //     }
+        $('#email').keyup(function(){
+            let emailRegx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]/
+            let enteredInput = $("#email").val();
+            if(enteredInput == ""){
+                isValid = false;
+                emailErr.text( "**This field is required...");
+                $("#email").addClass('errorEffect');
+            }
             
-        //     else if(emailRegx.test(enteredInput) == false) {
-        //         isValid = false;
-        //         emailErr.text("**Email is not valid...");
-        //         $("#email").addClass('errorEffect');
-        //     }
-        // });
+            else if(emailRegx.test(enteredInput) == false) {
+                isValid = false;
+                emailErr.text("**Email is not valid...");
+                $("#email").addClass('errorEffect');
+            }
+        });
 
        
             //Pincode validation
-        // $('#pin').keyup(function() {
-        //     let enteredInput = $("#pin").val(); 
-        //     if(enteredInput == "") {
-        //         pinErr.text("**This field is required..");
-        //         $("#pin").addClass('errorEffect');
-        //         isValid = false;
-        //     }
-        //     else if(/^\d+$/.test(enteredInput) == false) {
-        //         pinErr.text("**Pin no. contains digits only...");
-        //         $("#pin").addClass('errorEffect');
-        //         isValid = false;
-        //     }
-        //     else if(enteredInput.length < 5 || enteredInput.length > 7) {
-        //         pinErr.text("**Pin no. has 6 digits only...");
-        //         $("#pin").addClass('errorEffect');
-        //         isValid = false;
-        //     }
-        // })
+        $('#pin').keyup(function() {
+            let enteredInput = $("#pin").val(); 
+            if(enteredInput == "") {
+                pinErr.text("**This field is required..");
+                $("#pin").addClass('errorEffect');
+                isValid = false;
+            }
+            else if(/^\d+$/.test(enteredInput) == false) {
+                pinErr.text("**Pin no. contains digits only...");
+                $("#pin").addClass('errorEffect');
+                isValid = false;
+            }
+            else if(enteredInput.length < 5 || enteredInput.length > 7) {
+                pinErr.text("**Pin no. has 6 digits only...");
+                $("#pin").addClass('errorEffect');
+                isValid = false;
+            }
+        })
 
 
         
@@ -102,90 +98,82 @@ var validationModule = (function(){
          
 
          //Terms & Condition Validations        
-        // $("#terms").change(function() {
-        //     if($("#terms").prop("checked") == false) {
-        //         $("#terms").addClass('errorEffect')
-        //         termsErr.text("**Accept the terms and conditions...") ;
-        //         isValid = false;
-        //     }
-        // })
+        $("#terms").change(function() {
+            if($("#terms").prop("checked") == false) {
+                $("#terms").addClass('errorEffect')
+                termsErr.text("**Accept the terms and conditions...") ;
+                isValid = false;
+            }
+        })
         
 
-         //phno
-        // $('#phno').keyup(function(){
-        //     let enteredInput = $("#phno").val();
-        //     if(enteredInput == ""){
-        //         phnoErr.text("**This field is required...");
-        //         $("#phno").addClass('errorEffect')
-        //         isValid = false;
-        //     }
-        //     else if(/^\d+$/.test(enteredInput) == false) {
-        //         phnoErr.text("**Phone no has ten digit only..");
-        //         $("#phno").addClass('errorEffect')
-        //         isValid = false;
-        //     }
-        //     else if(enteredInput.length != 10 ) {
-        //         phnoErr.text("**Phone no is not valid..");
-        //         $("#phno").addClass('errorEffect')
-        //         isValid = false;
-        //     }
-        // })
-        
-
-                //For login page email validation
-        $('#loginEmail').keyup(function(){
-            let emailRegx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]/
-            let enteredInput = $("#loginEmail").val();
+             //phno
+        $('#phno').keyup(function(){
+            let enteredInput = $("#phno").val();
             if(enteredInput == ""){
+                phnoErr.text("**This field is required...");
+                $("#phno").addClass('errorEffect')
                 isValid = false;
-                $("#loginEmail-err").text( "**This field is required...");
-                $("#loginEmail").addClass('errorEffect');
             }
+            else if(/^\d+$/.test(enteredInput) == false) {
+                phnoErr.text("**Phone no has ten digit only..");
+                $("#phno").addClass('errorEffect')
+                isValid = false;
+            }
+            else if(enteredInput.length != 10 ) {
+                phnoErr.text("**Phone no is not valid..");
+                $("#phno").addClass('errorEffect')
+                isValid = false;
+            }
+        })
+        
+
+        //         //For login page email validation
+        // $('#loginEmail').keyup(function(){
+        //     let emailRegx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]/
+        //     let enteredInput = $("#loginEmail").val();
+        //     if(enteredInput == ""){
+        //         isValid = false;
+        //         $("#loginEmail-err").text( "**This field is required...");
+        //         $("#loginEmail").addClass('errorEffect');
+        //     }
             
-            else if(emailRegx.test(enteredInput) == false) {
-                isValid = false;
-                $("#loginEmail-err").text("**Email is not valid...");
-                $("#loginEmail").addClass('errorEffect');
-            }
-        });
-        
-        // $("#submit").on('click',function() {
-        //     if($('#fname').val() == ""){
-        //         pageModule.displaySubmitPopup('.errorPopup')
+        //     else if(emailRegx.test(enteredInput) == false) {
         //         isValid = false;
-        //     }
-        // })
-        
-        console.log(isValid);
-        //if email is already registered
-        // $("#submit").on('click',function() {
-        //     if(JSON.parse(localStorage.getItem("emailArray"))?.indexOf(formData.email) != -1){
-        //         emailErr.text("**Email is already registered...");
-        //         $("#email").addClass('errorEffect');
-        //         isValid = false;
-        //     }
-        // })
-        
-
-        // $(document).trigger('isValidUpdated',isValid); 
-
-        // $(document).on('isValidUpdated', function(event, newIsValid) {
-        //     console.log("isvalid updated",isValid);
-        //     isValid = newIsValid;
-        //     if(isValid == true) {
-        //         $("#form").attr('method','POST');
+        //         $("#loginEmail-err").text("**Email is not valid...");
+        //         $("#loginEmail").addClass('errorEffect');
         //     }
         // });
         
-        // $(document).on(function(e) {
-        //     if(isValid == false ){
-        //         e.preventDefault();
-        //     }
-        // })
+        
+        
+      
+        
+        $(document).trigger('isValidUpdated',isValid); 
+
+        // console.log(isValid,"after update");
+        
+      
+        return isValid;
+        
         
      
     }
+    async function submit() {   
+        $("#submit").on('click', function(e) {
+            let isValid = validation();
+            // console.log("Submit clickeddddd",validation());
+            if (!isValid) {
+                window.location.assign('../php/registration.php');
+                e.preventDefault();
+            } 
+        });
+        
+    }   
+    submit()
+    validation()
 
+    
 
 
     function passwordValidation(passSelecter,passErrSelecter) {

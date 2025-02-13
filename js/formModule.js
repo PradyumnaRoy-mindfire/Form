@@ -5,34 +5,26 @@ var formModule = (function($){
     var emailArray = []
     function init() {
         
-        validationModule.validation();
-        async function submit() {
-            
-            // isValid = validationModule.validation();
-
-           
-
-            // $("#submit").on('click',function() {
-            //     if(isValid == true) {
-            //         pageModule.displaySubmitPopup('.submitPopup');
-            //         // resetForm();
-            //         // $('#submit').prop("disabled", false );
-            //     }
-            // })
-            
+        // async function submit() {   
+        //     let isValid = validationModule.validation();
+        //     $(document).on('isValidUpdated', function(event, newIsValid) {
+        //         console.log("isvalid updated",isValid);
+        //         isValid = newIsValid;
                 
-                
-        
-    
+        //     });
             
-            // $(".login").on('click',function(e) {
-            //     console.log("Login bton clicked");
-            //     e.preventDefault();
-            //     login();
-            // });
+        //     $("#submit").on('click',function(e){
+               
+        //         if(isValid == false)
+        //             e.preventDefault(); 
+        //     })
+        //     // console.log(isValid,"formmodule");
+        //     // if(isValid == false){
+        //     //     $('#submit').attr('disabled',true);
+        //     // }
             
-        }   
-        submit()
+        // }   
+        // submit()
         
         
 

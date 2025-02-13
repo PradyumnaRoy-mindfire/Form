@@ -18,9 +18,12 @@
     // echo $_SERVER['REQUEST_METHOD']=='POST'."Post";   doubt: this is not giving any o/p why 
     
 
-    $jsonFile = '/var/www/html/test/Form/data.json';
-    include '../php/isEmpty.php';
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $isEmpty == false) {
+    // $jsonFile = '/var/www/html/test/Form/data.json';
+    $jsonFile = $_SERVER['DOCUMENT_ROOT'].'/test/Form/data.json';
+    
+    include '../php/validation.php';
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'  ) {
         $fname = $_POST['fname'];
         $lname = $_POST['lname'] ;
         $pass = $_POST['pass'] ;
@@ -99,7 +102,7 @@
             <div class="form-container">
 
                     <!-- entype is encryption type used for security purpose -->
-                <form  id="form" action="/test/Form/php/registration.php" method="post" enctype="multipart/form-data">  
+                <form  id="form" action="/test/Form/php/registration.php" method="POST" enctype="multipart/form-data">  
                     <div class="input-name">
                         <label for="fname" class="redStar">First Name</label>
 
