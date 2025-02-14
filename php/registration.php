@@ -21,7 +21,7 @@
     $jsonFile = $_SERVER['DOCUMENT_ROOT'].'/test/Form/data.json';
     
     
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $isEmpty == false ) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $isEmpty == false && $isUnique == true) {
         $fname = $_POST['fname'];
         $lname = $_POST['lname'] ;
         $pass = $_POST['pass'] ;
@@ -37,7 +37,7 @@
         if(isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
             $photo = $_FILES['photo'];
                 // Folder where to save
-            $uploadDir = $_SERVER['DOCUMENT_ROOT'].'/test/Form/test/Form/profilePhoto/';
+            $uploadDir = $_SERVER['DOCUMENT_ROOT'].'/test/Form/profilePhoto/';
                 //creating unique name for each photo
             $photoName  = uniqid()."_".basename($photo['name']);
             $photoTmpPath = $photo['tmp_name'];
@@ -108,7 +108,7 @@
 
                         <span class="recomandation" id="fname-recom">Firstname doesn't contain any symbol or digit...</span>
 
-                        <span id="fname-err" class="err-msg"></span>
+                        <span id="fname-err" class="err-msg"> <?php if(isset($fname)) echo $fnameErr?> </span>
 
                     </div>
 
@@ -119,7 +119,7 @@
                             <i class="fa-solid fa-circle-info warning" style="color: #FFD43B;" tabindex="0" id="lname-warn"></i>
                         </div>
 
-                        <span id="lname-err" class="err-msg"></span>
+                        <span id="lname-err" class="err-msg"> <?php if(isset($lname)) echo $lnameErr?> </span>
 
                         <span class="recomandation" id="lname-recom">Lastname doesn't contain any symbol or digit...</span>
                     </div>
@@ -135,7 +135,7 @@
                         <span class="recomandation" id="pass-recom">Password contains <b>atleast 6 and atmost 10 character</b> including <b>a symbol,a digit,capital and small character</b>...</span>
 
 
-                        <span id="pass-err" class="err-msg"></span>
+                        <span id="pass-err" class="err-msg"> <?php if(isset($pass)) echo $passErr?> </span>
 
                     </div>
 
@@ -154,7 +154,7 @@
                             <i class="fa-solid fa-circle-info warning" style="color: #FFD43B;" tabindex="0" id="phno-warn"></i>
                         </div>
 
-                        <span id="phno-err" class="err-msg"></span>
+                        <span id="phno-err" class="err-msg"> <?php if(isset($phno)) echo $phnoErr?> </span>
 
                         <span class="recomandation" id="phno-recom">Phone no. contains only <b>10 digits...</b></span>
                     </div>
@@ -167,7 +167,7 @@
                             <i class="fa-solid fa-circle-info warning" style="color: #FFD43B;" tabindex="0" id="email-warn"></i>
                         </div>
 
-                        <span id="email-err" class="err-msg"></span>
+                        <span id="email-err" class="err-msg"><?php if(isset($email)) echo $emailErr?></span>
 
                         <span class="recomandation" id="email-recom">Input should be in email format...</span>
 
@@ -198,7 +198,7 @@
                             <i class="fa-solid fa-circle-info warning" style="color: #FFD43B;" tabindex="0" id="pin-warn"></i>
                         </div>
 
-                        <span id="pin-err" class="err-msg"></span>
+                        <span id="pin-err" class="err-msg"> <?php if(isset($pin)) echo $pinErr?> </span>
 
                         <span class="recomandation" id="pin-recom">Pin code has only 5 or 6 digit...</span>
                     </div>

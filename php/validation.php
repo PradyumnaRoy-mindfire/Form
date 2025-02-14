@@ -1,5 +1,4 @@
 <?php 
-    $isValid = true;
     $isEmpty = false;
 
     $fname = $_POST['fname'];
@@ -41,6 +40,25 @@
         $isEmpty = true;
     }
    
+    $isUnique = true;
+    $jsonFile = $_SERVER['DOCUMENT_ROOT'] . '/test/Form/data.json';
+
+    if (file_exists($jsonFile) && file_get_contents($jsonFile)) {
+        $jsonData = file_get_contents($jsonFile);
+        $data = json_decode($jsonData, true);
+    } else {
+        $data = [];
+    
+        file_put_contents($jsonFile, json_encode($data, JSON_PRETTY_PRINT));
+    }
+
+    for($i = 0;$i < sizeof($data);$i++) {
+        if($email == $data[$i]['email']) {
+            $isUnique = false;
+            $emailErr = "**This email is already registered..";
+            break;
+        }
+    }
 
 ?>
 

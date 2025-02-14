@@ -17,7 +17,7 @@
     <?php
         session_start();
         
-        
+       
         $jsonFile = $_SERVER['DOCUMENT_ROOT'].'/test/Form/data.json';
         
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -25,7 +25,9 @@
             $pass = $_POST['pass'];
             $jsonData = file_get_contents($jsonFile);
             $data = json_decode($jsonData, true);
+
             
+
             $length = sizeof($data);
             for($i = 0;$i < $length;$i++) {
                 if($data[$i]['email'] == $email && $data[$i]['pass'] == $pass) {
@@ -36,8 +38,6 @@
                     $_SESSION['email'] = $data[$i]['email'];
                     $_SESSION['address'] = $data[$i]['address'];
                     $_SESSION['photo'] = $data[$i]['photo'];
-                    
-                    
                     
                     header("Location: http://localhost/test/Form/php/profile.php",true,302);   //301 for permanent redirection ,302 for temporary
                     exit();

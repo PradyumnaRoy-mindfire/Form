@@ -26,19 +26,6 @@
         "favourite": []
     },
     {
-        "fname": "Pradyumna",
-        "lname": "Roy",
-        "pass": "Roy@9734",
-        "phno": "6297496905",
-        "email": "roypradyumna7@gmail.com",
-        "gender": "",
-        "address": "midnapore",
-        "pin": "721242",
-        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67ada801b88c6_loginbackground.jpg",
-        "terms": true,
-        "favourite": []
-    },
-    {
         "fname": "hello",
         "lname": "Roy",
         "pass": "Roy@9734",
@@ -48,45 +35,6 @@
         "address": "Barasat",
         "pin": "201015",
         "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67adb361325fb_whiteBackground.jpg",
-        "terms": true,
-        "favourite": []
-    },
-    {
-        "fname": "Pradyumna",
-        "lname": "Roy",
-        "pass": "dfds",
-        "phno": "06297496905",
-        "email": "roypradyumna7@gmail.com",
-        "gender": "",
-        "address": "jagamara,Khandagiri",
-        "pin": "751030",
-        "photo": "",
-        "terms": true,
-        "favourite": []
-    },
-    {
-        "fname": "dsf",
-        "lname": "dsf",
-        "pass": "df",
-        "phno": "34",
-        "email": "sujan@gmail.com",
-        "gender": "",
-        "address": "",
-        "pin": "ds",
-        "photo": "",
-        "terms": true,
-        "favourite": []
-    },
-    {
-        "fname": "sdf",
-        "lname": "dsf",
-        "pass": "dsf",
-        "phno": "3434",
-        "email": "a@gmail.ocm",
-        "gender": "Male",
-        "address": "",
-        "pin": "34334",
-        "photo": "",
         "terms": true,
         "favourite": []
     },
@@ -117,7 +65,7 @@
         "favourite": []
     },
     {
-        "fname": "2",
+        "fname": "Biltu",
         "lname": "Pal",
         "pass": "Roy@9734",
         "phno": "0629749690",
@@ -125,7 +73,7 @@
         "gender": "",
         "address": "jagamara,Khandagiri",
         "pin": "751030",
-        "photo": "\/var\/www\/html\/test\/Form\/test\/Form\/profilePhoto\/67adecd48fb39_loginbackground.jpg",
+        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67adecd48fb39_loginbackground.jpg",
         "terms": true,
         "favourite": {
             "3": {
@@ -133,5 +81,57 @@
                 "item": "n nn"
             }
         }
+    },
+    {
+        "fname": "Rohit",
+        "lname": "Sharma",
+        "pass": "Roy@9734",
+        "phno": "0629749690",
+        "email": "rs@gmail.com",
+        "gender": "",
+        "address": "jagamara,Khandagiri",
+        "pin": "751030",
+        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67aecbff464ce_loginbackground.jpg",
+        "terms": true,
+        "favourite": []
+    },
+    {
+        "fname": "Sujan",
+        "lname": "Roy",
+        "pass": "Roy@9734",
+        "phno": "9575515866",
+        "email": "ro@gmail.com",
+        "gender": "",
+        "address": "jagamara",
+        "pin": "751030",
+        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67aeccd5d0a1a_testBack.jpg",
+        "terms": true,
+        "favourite": []
+    },
+    {
+        "fname": "Pradyumna",
+        "lname": "Roy",
+        "pass": "Roy@9734",
+        "phno": "0629749690",
+        "email": "roypradyumna7@gmail.com",
+        "gender": "",
+        "address": "jagamara,Khandagiri",
+        "pin": "751030",
+        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67aed0b3dd64a_Photo_Pradyumna.jpg",
+        "terms": true,
+        "favourite": []
+    },
+    {
+        "fname": "Pradyumna",
+        "lname": "Roy",
+        "pass": "Roy@9734",
+        "phno": "0629749690",
+        "email": "roo@gmail.com",
+        "gender": "",
+        "address": "jagamara,Khandagiri",
+        "pin": "751030",
+        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67aed6475b2f6_Screenshot from 2025-02-12 12-09-40.png",
+        "terms": true,
+        "favourite": []
     }
 ]
