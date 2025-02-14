@@ -79,6 +79,18 @@ var pageModule = (function($){
             $("#terms").removeClass('errorEffect');
             $("#terms-err").text("");
         });
+           //for favInput
+        $("#favouriteName").on('input',function() {
+            $("#favouriteName").removeClass('errorEffect');
+            $("#favNameErr").text("");
+        });
+
+        $("#favouriteItem").on('input',function() {
+            $("#favouriteItem").removeClass('errorEffect');
+            $("#favItemErr").text("");
+        });
+
+
         
        
     }

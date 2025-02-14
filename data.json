@@ -1,114 +1,6 @@
-[
-    {
-        "fname": "Deepak",
-        "lname": "Roy",
-        "pass": "Roy@9734",
-        "phno": "0629749690",
-        "email": "dp@gmail.com",
-        "gender": "Male",
-        "address": "jagamara,Khandagiri",
-        "pin": "751030",
-        "photo": "",
-        "terms": true,
-        "favourite": []
-    },
-    {
-        "fname": "Sujan",
-        "lname": "Roy",
-        "pass": "Roy@9734",
-        "phno": "9575515866",
-        "email": "ro@gmail.com",
-        "gender": "",
-        "address": "jagamara",
-        "pin": "751030",
-        "photo": "",
-        "terms": true,
-        "favourite": []
-    },
-    {
-        "fname": "hello",
-        "lname": "Roy",
-        "pass": "Roy@9734",
-        "phno": "6297274005",
-        "email": "pr@gmail.com",
-        "gender": "Male",
-        "address": "Barasat",
-        "pin": "201015",
-        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67adb361325fb_whiteBackground.jpg",
-        "terms": true,
-        "favourite": []
-    },
-    {
-        "fname": "Deep",
-        "lname": "Patra",
-        "pass": "Roy@9734",
-        "phno": "0629749690",
-        "email": "dpatra@gmail.com",
-        "gender": "",
-        "address": "jagamara,Khandagiri",
-        "pin": "751030",
-        "photo": "",
-        "terms": true,
-        "favourite": []
-    },
-    {
-        "fname": "Shivammmm",
-        "lname": "Roy",
-        "pass": "Roy@9734",
-        "phno": "6297496906",
-        "email": "roy@gmail.com",
-        "gender": "",
-        "address": "jagamara,Khandagiri",
-        "pin": "751030",
-        "photo": "",
-        "terms": true,
-        "favourite": []
-    },
-    {
-        "fname": "Biltu",
-        "lname": "Pal",
-        "pass": "Roy@9734",
-        "phno": "0629749690",
-        "email": "db@gmail.com",
-        "gender": "",
-        "address": "jagamara,Khandagiri",
-        "pin": "751030",
-        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67adecd48fb39_loginbackground.jpg",
-        "terms": true,
-        "favourite": {
-            "3": {
-                "name": "   tttr",
-                "item": "n nn"
-            }
-        }
-    },
-    {
-        "fname": "Rohit",
-        "lname": "Sharma",
-        "pass": "Roy@9734",
-        "phno": "0629749690",
-        "email": "rs@gmail.com",
-        "gender": "",
-        "address": "jagamara,Khandagiri",
-        "pin": "751030",
-        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67aecbff464ce_loginbackground.jpg",
-        "terms": true,
-        "favourite": []
-    },
-    {
-        "fname": "Sujan",
-        "lname": "Roy",
-        "pass": "Roy@9734",
-        "phno": "9575515866",
-        "email": "ro@gmail.com",
-        "gender": "",
-        "address": "jagamara",
-        "pin": "751030",
-        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67aeccd5d0a1a_testBack.jpg",
-        "terms": true,
-        "favourite": []
-    },
-    {
+{
+    "1": {
+        "id": 1,
         "fname": "Pradyumna",
         "lname": "Roy",
         "pass": "Roy@9734",
@@ -117,21 +9,24 @@
         "gender": "",
         "address": "jagamara,Khandagiri",
         "pin": "751030",
-        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67aed0b3dd64a_Photo_Pradyumna.jpg",
+        "photo": "",
         "terms": true,
-        "favourite": []
-    },
-    {
-        "fname": "Pradyumna",
-        "lname": "Roy",
-        "pass": "Roy@9734",
-        "phno": "0629749690",
-        "email": "roo@gmail.com",
-        "gender": "",
-        "address": "jagamara,Khandagiri",
-        "pin": "751030",
-        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67aed6475b2f6_Screenshot from 2025-02-12 12-09-40.png",
-        "terms": true,
-        "favourite": []
+        "favourite": {
+            "1": {
+                "id": 1,
+                "name": "hd",
+                "item": "jyft"
+            },
+            "3": {
+                "id": 3,
+                "name": "nfcfx",
+                "item": "yyh"
+            },
+            "4": {
+                "id": 4,
+                "name": "sdsds",
+                "item": "ffvv"
+            }
+        }
     }
-]
+}

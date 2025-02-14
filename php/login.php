@@ -29,16 +29,17 @@
             
 
             $length = sizeof($data);
-            for($i = 0;$i < $length;$i++) {
+            for($i = 1;$i <= $length;$i++) {
                 if($data[$i]['email'] == $email && $data[$i]['pass'] == $pass) {
 
+                    $_SESSION['id'] = $data[$i]['id'];
                     $_SESSION['fname'] = $data[$i]['fname'];
                     $_SESSION['lname'] = $data[$i]['lname'];
                     $_SESSION['phno'] = $data[$i]['phno'];
                     $_SESSION['email'] = $data[$i]['email'];
                     $_SESSION['address'] = $data[$i]['address'];
                     $_SESSION['photo'] = $data[$i]['photo'];
-                    
+                    $_SESSION['totalFavourite'] = count($data[$i]['favourite']);
                     header("Location: http://localhost/test/Form/php/profile.php",true,302);   //301 for permanent redirection ,302 for temporary
                     exit();
                 }

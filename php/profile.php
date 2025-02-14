@@ -14,7 +14,10 @@
     <?php
     session_start();
 
-
+    if( !$_SESSION['id']) {
+        header("Location: http://localhost/test/Form/php/login.php",true,301);
+        exit();
+    }
     $jsonFile = $_SERVER['DOCUMENT_ROOT'] . '/test/Form/data.json';
 
     if (file_exists($jsonFile) && file_get_contents($jsonFile)) {
@@ -35,27 +38,49 @@
         $address = isset($_POST['address']) ? $_POST['address'] : $_SESSION['address'];
         $i = 0;
 
-        for (; $i < sizeof($data); $i++) {
-            if ($data[$i]['email'] == $_SESSION['email']) {
-                $data[$i]['fname'] = $fname;
-                $data[$i]['lname'] = $lname;
-                $data[$i]['email'] = $email;
-                $data[$i]['phno'] = $phno;
-                $data[$i]['address'] = $address;
-                //Update both session data and data.json
-                $_SESSION['fname'] = $fname;
-                $_SESSION['lname'] = $lname;
-                $_SESSION['email'] = $email;
-                $_SESSION['phno'] = $phno;
-                $_SESSION['address'] = $address;
+        $isValid = true;
+        $nameErr = "";
+        $emailErr = "";
+        $phnoErr = "";
 
-                break;
-            }
+        if(empty($fname) || preg_match('/\d/',$fname) || preg_match('/\d/',$lname)) {
+            $nameErr = "**First name and last name should not be empty or not contain any digits";
+            $isValid = false;
         }
-        $favouriteArray = $data[$i]['favourite'];
+        $emailRegx = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/';
+        if(empty($email) || preg_match($emailRegx,$email) == false) {
+            $emailErr = "**Email is not valid...";
+            $isValid = false;
+        }
+        if(empty($phno) || preg_match("/^\d{10}$/",$phno) == false) {
+            $phnoErr = "**Phno should contain exactly ten digits..";
+            $isValid = false;
+        }
 
-        $jsonData = json_encode($data, JSON_PRETTY_PRINT);
-        file_put_contents($jsonFile, $jsonData);
+        if($isValid == true) {
+             $i = $_SESSION['id'];
+                if ($data[$i]['email'] == $_SESSION['email']) {
+                    $data[$i]['fname'] = $fname;
+                    $data[$i]['lname'] = $lname;
+                    $data[$i]['email'] = $email;
+                    $data[$i]['phno'] = $phno;
+                    $data[$i]['address'] = $address;
+                    //Update both session data and data.json
+                    $_SESSION['fname'] = $fname;
+                    $_SESSION['lname'] = $lname;
+                    $_SESSION['email'] = $email;
+                    $_SESSION['phno'] = $phno;
+                    $_SESSION['address'] = $address;
+                    
+                    
+                }
+            
+            $favouriteArray = $data[$i]['favourite'];
+                
+            $jsonData = json_encode($data, JSON_PRETTY_PRINT);
+            file_put_contents($jsonFile, $jsonData);
+        }
+
 
         
     }
@@ -63,44 +88,27 @@
     if(isset($_GET['action']) && $_GET['action'] == 'storeFavouriteData') {
         $favouriteName = $_GET['favData']['name'];
         $favouriteItem = $_GET['favData']['item'];
-        $j = 0;
+        $j = $_SESSION['id'];
 
-        for ( ; $j < sizeof($data); $j++) {
             if ($data[$j]['email'] == $_SESSION['email']) {
-                $data[$j]['favourite'][] = [
+                $favouritesSize = 0;
+                if(isset($data[$j]['favourite'])){
+                    $favouritesSize = count($data[$j]['favourite']);
+                } 
+                $data[$j]['favourite'][$favouritesSize + 1] = [
+                    'id'=> $favouritesSize + 1,
                     'name' => $favouriteName,
                     'item' => $favouriteItem
                 ];
-
+                $_SESSION['totalFavourite'] = $favouritesSize + 1;
 
                 file_put_contents($jsonFile, json_encode($data, JSON_PRETTY_PRINT));
-                break;
             }
-        }   
         
     }
 
     
 
-        //For deleteing the favourite data
-    if (isset($_GET['action']) && $_GET['action'] == 'delete') {
-        $id = $_GET['id']; 
-        //key is index and user is the whole data correspoding the index in data.json
-        foreach ($data as $key => $user) {
-            if ($user['email'] == $_SESSION['email']) {
-
-                if (isset($user['favourite'][$id])) {
-                    // Removing the favourite item from the user's array
-                    unset($data[$key]['favourite'][$id]);
-                    // reindexing the array to fix any gap
-                    $data[$key]['favourite'] = array_values($data[$key]['favourite']);
-                    break;
-                }
-            }
-        }
-
-        file_put_contents($jsonFile, json_encode($data, JSON_PRETTY_PRINT));
-    }
 
         //log out
     if(isset($_GET['action']) && $_GET['action'] == 'logout') {
@@ -134,21 +142,25 @@
                     <input type="text" name="fname" id="fnameProfile" class="profileInput" value="<?php echo $_SESSION['fname'] ?>">
                     <input type="text" name="lname" id="lnameProfile" class="profileInput" value="<?php echo $_SESSION['lname'] ?>">
                 </div>
+                <span class="err-msg" id="pfname-err"><?php if(isset($fname) && isset($lname)) echo $nameErr?></span>
 
                 <div class="inpDiv" id="phnopf">
                     <i class="fa-solid fa-square-phone  fa-lg icon "></i>
                     <input type="number" name="phno" id="phnoProfile" class="profileInput" value="<?php echo $_SESSION['phno'] ?>">
                 </div>
+                <span class="err-msg" id="pfphno-err"> <?php if(isset($phno)) echo $phnoErr?></span>
 
                 <div class="inpDiv" id="emailpf">
                     <i class="fa-solid fa-envelope  fa-lg icon"></i>
                     <input type="email" name="email" id="emailProfile" class="profileInput" value="<?php echo $_SESSION['email'] ?>">
                 </div>
+                <span class="err-msg" id="pfemail-err"> <?php if(isset($email)) echo $emailErr?></span>
 
                 <div class="inpDiv" id="addresspf">
                     <i class="fa-solid fa-location-dot fa-lg icon"></i>
                     <input type="text" name="address" id="addressProfile" class="profileInput" value="<?php echo $_SESSION['address'] ?>">
                 </div>
+                
 
                 <!-- for lo g out -->
                 <div class="logout">
@@ -172,23 +184,23 @@
         <table id="table">
             <thead>
                 <tr>
+                    <th>SL No.</th>
                     <th>Name</th>
                     <th>Item</th>
                     <th>Action</th>
                 </tr>
                 <?php
-                $k = 0;
-                for (; $k < sizeof($data); $k++) {
-                    if ($data[$k]['email'] == $_SESSION['email'])
-                        break;
-                }
-                foreach ($data[$k]['favourite'] as $row): ?>
-                    <tr>
-                        <td> <?php echo htmlspecialchars($row['name']) ?></td>
-                        <td> <?php echo htmlspecialchars($row['item']) ?></td>
-                        <td> <i class="fa-solid fa-trash  btnDelete" style="color: #ff0a0a;"></i></td>
-                    </tr>
-                <?php endforeach ?>
+                $k = $_SESSION['id'];
+                
+                if(isset($data[$k]['favourite'])) {
+                    foreach ($data[$k]['favourite'] as $row){ ?>
+                        <tr>
+                            <td> <?php echo htmlspecialchars($row['id']) ?></td>
+                            <td> <?php echo htmlspecialchars($row['name']) ?></td>
+                            <td> <?php echo htmlspecialchars($row['item']) ?></td>
+                            <td> <i class="fa-solid fa-trash  btnDelete" style="color: #ff0a0a;"></i></td>
+                        </tr>
+                <?php } } ?>
 
 
 
@@ -202,10 +214,13 @@
             </tbody>
         </table>
         <div class="dropdown-form">
-            <form id="favouriteForm" method="POST">
+            <form id="favouriteForm" method="POST" data-id="">
+                <input type="hidden" value=<?php echo $_SESSION['totalFavourite'] + 1;?>  id="favouriteId" >
                 <input type="text" id="favouriteName" class="favouriteFormInput" name="favouriteName" required placeholder="Name"><br><br>
+                <span class="err-msg error" id="favNameErr"></span>
 
                 <input type="text" id="favouriteItem" class="favouriteFormInput" name="favouriteItem" required placeholder="Item"><br><br>
+                <span class="err-msg error" id="favItemErr"></span>
 
                 <button type="submit" class="Favourite-btn" >Add to Favourite</button>
             </form>

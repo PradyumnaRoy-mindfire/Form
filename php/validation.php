@@ -1,11 +1,11 @@
 <?php 
     $isEmpty = false;
 
-    $fname = $_POST['fname'];
-    $pass = $_POST['pass'] ;
-    $phno = $_POST['phno'] ;
-    $email = $_POST['email'] ;
-    $pin = $_POST['pin'] ;
+    $fname = isset($_POST['fname']) ? $_POST['fname'] : "";
+    $pass = isset($_POST['pass']) ? $_POST['pass'] : "" ;
+    $phno = isset($_POST['phno']) ? $_POST['phno']:"" ;
+    $email = isset($_POST['email']) ? $_POST['email']:"" ;
+    $pin = isset($_POST['pin']) ? $_POST['pin']:"";
     $terms = isset($_POST['terms']) ? true : false;
 
     $fnameErr = "";
@@ -40,7 +40,7 @@
         $isEmpty = true;
     }
    
-    $isUnique = true;
+    $isUniqueUser = true;
     $jsonFile = $_SERVER['DOCUMENT_ROOT'] . '/test/Form/data.json';
 
     if (file_exists($jsonFile) && file_get_contents($jsonFile)) {
@@ -52,9 +52,9 @@
         file_put_contents($jsonFile, json_encode($data, JSON_PRETTY_PRINT));
     }
 
-    for($i = 0;$i < sizeof($data);$i++) {
+    for($i = 1;$i <= sizeof($data);$i++) {
         if($email == $data[$i]['email']) {
-            $isUnique = false;
+            $isUniqueUser = false;
             $emailErr = "**This email is already registered..";
             break;
         }

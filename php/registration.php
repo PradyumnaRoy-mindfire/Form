@@ -21,7 +21,7 @@
     $jsonFile = $_SERVER['DOCUMENT_ROOT'].'/test/Form/data.json';
     
     
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $isEmpty == false && $isUnique == true) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $isEmpty == false && $isUniqueUser == true) {
         $fname = $_POST['fname'];
         $lname = $_POST['lname'] ;
         $pass = $_POST['pass'] ;
@@ -45,7 +45,18 @@
 
             move_uploaded_file($photoTmpPath, $photoPath);
         }
+        
+            //if file exist 
+        if (file_exists($jsonFile)) {
+            $jsonData = file_get_contents($jsonFile);
+            $data = json_decode($jsonData, true); 
+        } else {
+            // If the file does not exist, create an empty array
+            $data = array(); 
+        }
+        $length = sizeof($data);
         $formData = array(
+            'id' => sizeof($data)+1,
             'fname' => $fname,
             'lname' => $lname,
             'pass' => $pass,
@@ -56,25 +67,17 @@
             'pin' => $pin,
             'photo' => $photoPath,
             'terms' => $terms,
-            'favourite' => []
+            'favourite' => [],
         );
-        echo $formData;
-            //if file exist 
-        if (file_exists($jsonFile)) {
-            $jsonData = file_get_contents($jsonFile);
-            $data = json_decode($jsonData, true); 
-        } else {
-            // If the file does not exist, create an empty array
-            $data = array(); 
-        }
             //append the formdata to the data array
-        $data[] = $formData;
+        $data[$length+1] = $formData;
+
 
     
         // Encode the data back into a JSON format
         $jsonData = json_encode($data, JSON_PRETTY_PRINT);
 
-        // Save the new data into the JSON file
+        // Save again the new data into the JSON file
         file_put_contents($jsonFile, $jsonData);
 
             // location will came back to this page itself ,it prevents from storing data in to json file while reloading
