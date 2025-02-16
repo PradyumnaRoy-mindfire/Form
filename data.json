@@ -1,6 +1,6 @@
 {
     "1": {
-        "id": 1,
+        "userId": 1,
         "fname": "Pradyumna",
         "lname": "Roy",
         "pass": "Roy@9734",
@@ -14,19 +14,68 @@
         "favourite": {
             "1": {
                 "id": 1,
-                "name": "hd",
-                "item": "jyft"
+                "name": "fdg",
+                "item": "fd"
+            },
+            "2": {
+                "id": 2,
+                "name": "fsd",
+                "item": "dsf"
             },
             "3": {
                 "id": 3,
-                "name": "nfcfx",
-                "item": "yyh"
+                "name": "ew",
+                "item": "sdf"
             },
             "4": {
                 "id": 4,
-                "name": "sdsds",
-                "item": "ffvv"
+                "name": "hi",
+                "item": "ll"
+            },
+            "5": {
+                "id": 5,
+                "name": "jsd",
+                "item": "ds"
+            },
+            "6": {
+                "id": "6",
+                "name": "done",
+                "item": "sda"
             }
         }
+    },
+    "2": {
+        "userId": 2,
+        "fname": "Sujan",
+        "lname": "Roy",
+        "pass": "Roy@9734",
+        "phno": "9575515866",
+        "email": "sujan@gmail.com",
+        "gender": "Male",
+        "address": "jagamara",
+        "pin": "751030",
+        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67b1bda2708d4_Screenshot from 2025-02-12 12-09-40.png",
+        "terms": true,
+        "favourite": {
+            "1": {
+                "id": 1,
+                "name": "Company",
+                "item": "Mindfire"
+            }
+        }
+    },
+    "3": {
+        "userId": 3,
+        "fname": "Jai",
+        "lname": "Milan",
+        "pass": "Roy@9734",
+        "phno": "7001254856",
+        "email": "jai@gmail.com",
+        "gender": "",
+        "address": "Bhadrak,Odisha",
+        "pin": "751025",
+        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67b1c04a4429a_loginbackground.jpg",
+        "terms": true,
+        "favourite": []
     }
 }

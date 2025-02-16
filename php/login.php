@@ -31,8 +31,7 @@
             $length = sizeof($data);
             for($i = 1;$i <= $length;$i++) {
                 if($data[$i]['email'] == $email && $data[$i]['pass'] == $pass) {
-
-                    $_SESSION['id'] = $data[$i]['id'];
+                    $_SESSION['userId'] = $data[$i]['userId'];
                     $_SESSION['fname'] = $data[$i]['fname'];
                     $_SESSION['lname'] = $data[$i]['lname'];
                     $_SESSION['phno'] = $data[$i]['phno'];
@@ -116,7 +115,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
        
     <script src="../js/script.js"></script>
-    <script src="../js/formModule.js"></script>
     <script src="../js/validationModule.js"></script>
     <script src="../js/pageModule.js"></script>
     <script src="../js/favouriteModule.js"></script>

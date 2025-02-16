@@ -6,114 +6,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/profile.css">
 
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+
     <?php
-    session_start();
-
-    if( !$_SESSION['id']) {
-        header("Location: http://localhost/test/Form/php/login.php",true,301);
-        exit();
-    }
-    $jsonFile = $_SERVER['DOCUMENT_ROOT'] . '/test/Form/data.json';
-
-    if (file_exists($jsonFile) && file_get_contents($jsonFile)) {
-        $jsonData = file_get_contents($jsonFile);
-        $data = json_decode($jsonData, true);
-    } else {
-        $data = [];
-    
-        file_put_contents($jsonFile, json_encode($data, JSON_PRETTY_PRINT));
-    }
-
-
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        $fname = isset($_POST['fname']) ? $_POST['fname'] : $_SESSION['fname'];
-        $lname = isset($_POST['lname']) ? $_POST['lname'] : $_SESSION['lname'];
-        $email = isset($_POST['email']) ? $_POST['email'] : $_SESSION['email'];
-        $phno = isset($_POST['phno']) ? $_POST['phno'] : $_SESSION['phno'];
-        $address = isset($_POST['address']) ? $_POST['address'] : $_SESSION['address'];
-        $i = 0;
-
-        $isValid = true;
-        $nameErr = "";
-        $emailErr = "";
-        $phnoErr = "";
-
-        if(empty($fname) || preg_match('/\d/',$fname) || preg_match('/\d/',$lname)) {
-            $nameErr = "**First name and last name should not be empty or not contain any digits";
-            $isValid = false;
+        session_start();
+            //if session expired redirect to the login page
+        if( !$_SESSION['userId']) {
+            header("Location: http://localhost/test/Form/php/login.php",true,301);
+            exit();
         }
-        $emailRegx = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/';
-        if(empty($email) || preg_match($emailRegx,$email) == false) {
-            $emailErr = "**Email is not valid...";
-            $isValid = false;
-        }
-        if(empty($phno) || preg_match("/^\d{10}$/",$phno) == false) {
-            $phnoErr = "**Phno should contain exactly ten digits..";
-            $isValid = false;
+        $jsonFile = $_SERVER['DOCUMENT_ROOT'] . '/test/Form/data.json';
+
+        if (file_exists($jsonFile) && file_get_contents($jsonFile)) {
+            $jsonData = file_get_contents($jsonFile);
+            $data = json_decode($jsonData, true);
+        } else {
+            $data = [];
+        
+            file_put_contents($jsonFile, json_encode($data, JSON_PRETTY_PRINT));
         }
 
-        if($isValid == true) {
-             $i = $_SESSION['id'];
-                if ($data[$i]['email'] == $_SESSION['email']) {
-                    $data[$i]['fname'] = $fname;
-                    $data[$i]['lname'] = $lname;
-                    $data[$i]['email'] = $email;
-                    $data[$i]['phno'] = $phno;
-                    $data[$i]['address'] = $address;
-                    //Update both session data and data.json
-                    $_SESSION['fname'] = $fname;
-                    $_SESSION['lname'] = $lname;
-                    $_SESSION['email'] = $email;
-                    $_SESSION['phno'] = $phno;
-                    $_SESSION['address'] = $address;
-                    
-                    
+
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $fname = isset($_POST['fname']) ? $_POST['fname'] : $_SESSION['fname'];
+            $lname = isset($_POST['lname']) ? $_POST['lname'] : $_SESSION['lname'];
+            $email = isset($_POST['email']) ? $_POST['email'] : $_SESSION['email'];
+            $phno = isset($_POST['phno']) ? $_POST['phno'] : $_SESSION['phno'];
+            $address = isset($_POST['address']) ? $_POST['address'] : $_SESSION['address'];
+            $i = 0;
+
+            $isValid = true;
+            $nameErr = "";
+            $emailErr = "";
+            $phnoErr = "";
+
+            if(empty($fname) || preg_match('/\d/',$fname) || preg_match('/\d/',$lname)) {
+                $nameErr = "**First name and last name should not be empty or not contain any digits";
+                $isValid = false;
+            }
+            $emailRegx = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/';
+            if(empty($email) || preg_match($emailRegx,$email) == false) {
+                $emailErr = "**Email is not valid...";
+                $isValid = false;
+            }
+            if(empty($phno) || preg_match("/^\d{10}$/",$phno) == false) {
+                $phnoErr = "**Phno should contain exactly ten digits..";
+                $isValid = false;
+            }
+
+            if($isValid == true) {
+                $i = $_SESSION['userId'];
+                    if ($data[$i]['email'] == $_SESSION['email']) {
+                        $data[$i]['fname'] = $fname;
+                        $data[$i]['lname'] = $lname;
+                        $data[$i]['email'] = $email;
+                        $data[$i]['phno'] = $phno;
+                        $data[$i]['address'] = $address;
+                        //Update both session data and data.json
+                        $_SESSION['fname'] = $fname;
+                        $_SESSION['lname'] = $lname;
+                        $_SESSION['email'] = $email;
+                        $_SESSION['phno'] = $phno;
+                        $_SESSION['address'] = $address;
+                        
+                    }
+            }
+
+            if($data[$_SESSION['userId']]['favourite']) {
+                    //copying the values to the favourites array with default index(if we had deleted before)
+                $favourites = array_values($data[$_SESSION['userId']]['favourite']); 
+                $newFavourites = [];
+                    //$index => $fav works like key value pair index and correspoding favourite
+                foreach ($favourites as $index => $fav) {
+                    $newFavourites[$index + 1] = [
+                        'id' => $index + 1, 
+                        'name' => $fav['name'],
+                        'item' => $fav['item']
+                    ];
                 }
-            
-            $favouriteArray = $data[$i]['favourite'];
-                
+                    //update the new indexed array to the old
+                $data[$_SESSION['userId']]['favourite'] = $newFavourites;
+                    //update also to the session to get current indexed in js from the hidden input
+                $_SESSION['totalFavourite'] = count($newFavourites);
+            }
+
             $jsonData = json_encode($data, JSON_PRETTY_PRINT);
             file_put_contents($jsonFile, $jsonData);
+
+            
         }
 
 
+            // For favourite data store
+        if(isset($_GET['action']) && $_GET['action'] == 'storeFavouriteData') {
+            $favouriteName = $_GET['favData']['name'];
+            $favouriteItem = $_GET['favData']['item'];
+            $rowId = $_GET['rowId'];
+
+            $j = $_SESSION['userId'];
+
+                if ($data[$j]['email'] == $_SESSION['email']) {
+                    
+                    $data[$j]['favourite'][$rowId] = [
+                        'id'=> $rowId,
+                        'name' => $favouriteName,
+                        'item' => $favouriteItem
+                    ];
+                    $_SESSION['totalFavourite'] = $rowId;
+
+                    file_put_contents($jsonFile, json_encode($data, JSON_PRETTY_PRINT));
+                }
+            
+        }
+
         
-    }
-        // For favourite data store
-    if(isset($_GET['action']) && $_GET['action'] == 'storeFavouriteData') {
-        $favouriteName = $_GET['favData']['name'];
-        $favouriteItem = $_GET['favData']['item'];
-        $j = $_SESSION['id'];
-
-            if ($data[$j]['email'] == $_SESSION['email']) {
-                $favouritesSize = 0;
-                if(isset($data[$j]['favourite'])){
-                    $favouritesSize = count($data[$j]['favourite']);
-                } 
-                $data[$j]['favourite'][$favouritesSize + 1] = [
-                    'id'=> $favouritesSize + 1,
-                    'name' => $favouriteName,
-                    'item' => $favouriteItem
-                ];
-                $_SESSION['totalFavourite'] = $favouritesSize + 1;
-
-                file_put_contents($jsonFile, json_encode($data, JSON_PRETTY_PRINT));
-            }
-        
-    }
-
-    
 
 
-        //log out
-    if(isset($_GET['action']) && $_GET['action'] == 'logout') {
-        session_destroy();
-    }
+            //log out
+        if(isset($_GET['action']) && $_GET['action'] == 'logout') {
+            session_destroy();
+        }
 
     ?>
 
@@ -190,7 +205,7 @@
                     <th>Action</th>
                 </tr>
                 <?php
-                $k = $_SESSION['id'];
+                $k = $_SESSION['userId'];
                 
                 if(isset($data[$k]['favourite'])) {
                     foreach ($data[$k]['favourite'] as $row){ ?>
@@ -209,13 +224,15 @@
             <tbody>
                 <!-- Prepend to this row -->
                 <tr class="emptyRow" style="background-color: black;">
-                    <td colspan="3" style=" text-align: center;" ><button id="openForm">New</button></td>
+                    <td colspan="4" style=" text-align: center;" ><button id="openForm">New</button></td>
                 </tr>
             </tbody>
         </table>
         <div class="dropdown-form">
-            <form id="favouriteForm" method="POST" data-id="">
-                <input type="hidden" value=<?php echo $_SESSION['totalFavourite'] + 1;?>  id="favouriteId" >
+            <form id="favouriteForm" method="POST">
+                        <!-- for getting current index in js from server -->
+                <input type="hidden" value="<?php echo $_SESSION['totalFavourite'] + 1;?> " id="favouriteId" >
+
                 <input type="text" id="favouriteName" class="favouriteFormInput" name="favouriteName" required placeholder="Name"><br><br>
                 <span class="err-msg error" id="favNameErr"></span>
 
@@ -231,7 +248,6 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="../js/script.js"></script>
-    <script src="../js/formModule.js"></script>
     <script src="../js/favouriteModule.js"></script>
     <script src="../js/validationModule.js"></script>
     <script src="../js/pageModule.js"></script>

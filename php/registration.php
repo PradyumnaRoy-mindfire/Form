@@ -56,7 +56,7 @@
         }
         $length = sizeof($data);
         $formData = array(
-            'id' => sizeof($data)+1,
+            'userId' => sizeof($data)+1,
             'fname' => $fname,
             'lname' => $lname,
             'pass' => $pass,
@@ -72,16 +72,13 @@
             //append the formdata to the data array
         $data[$length+1] = $formData;
 
-
-    
         // Encode the data back into a JSON format
         $jsonData = json_encode($data, JSON_PRETTY_PRINT);
 
         // Save again the new data into the JSON file
         file_put_contents($jsonFile, $jsonData);
-
-            // location will came back to this page itself ,it prevents from storing data in to json file while reloading
-
+        
+        // location will came back to this page itself ,it prevents from storing data in to json file while reloading
         header("Location: http://localhost/test/Form/php/login.php",true,301);
         exit();
     }
@@ -253,7 +250,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
        
     <script src="../js/script.js"></script>
-    <script src="../js/formModule.js"></script>
     <script src="../js/favouriteModule.js"></script>
     <script src="../js/validationModule.js"></script>
     <script src="../js/pageModule.js"></script>

@@ -353,13 +353,13 @@ tr:nth-child(even) {
     margin-left: 3%;
     color: red;
 }
-#favItemErr {   
-    position: absolute;
-    bottom: 20%;
-    left: 15%;
-}
 #favNameErr {
     position: absolute;
-    bottom: 41%;
+    bottom: 30%;
+    left: 15%;
+}
+#favItemErr {   
+    position: absolute;
+    bottom: 14%;
     left: 15%;
 }

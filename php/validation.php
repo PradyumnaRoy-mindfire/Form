@@ -1,11 +1,12 @@
 <?php 
+        // for checking in the required fields are left empty
     $isEmpty = false;
 
-    $fname = isset($_POST['fname']) ? $_POST['fname'] : "";
-    $pass = isset($_POST['pass']) ? $_POST['pass'] : "" ;
-    $phno = isset($_POST['phno']) ? $_POST['phno']:"" ;
-    $email = isset($_POST['email']) ? $_POST['email']:"" ;
-    $pin = isset($_POST['pin']) ? $_POST['pin']:"";
+    $fname = isset($_POST['fname']) ? $_POST['fname'] : " ";
+    $pass = isset($_POST['pass']) ? $_POST['pass'] : " " ;
+    $phno = isset($_POST['phno']) ? $_POST['phno']:" " ;
+    $email = isset($_POST['email']) ? $_POST['email']:" " ;
+    $pin = isset($_POST['pin']) ? $_POST['pin']:" ";
     $terms = isset($_POST['terms']) ? true : false;
 
     $fnameErr = "";
@@ -40,6 +41,7 @@
         $isEmpty = true;
     }
    
+        //checking email is unique or not
     $isUniqueUser = true;
     $jsonFile = $_SERVER['DOCUMENT_ROOT'] . '/test/Form/data.json';
 

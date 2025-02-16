@@ -14,7 +14,9 @@ var favouriteModule = (function($){
             e.preventDefault();
             console.log("fab button clicked");
             let favData = {};
+
             let id = $("#favouriteId").val();
+            console.log(id,"hidden id");
             let name = $("#favouriteName").val();
             let item = $("#favouriteItem").val();
                 //favourite data validation
@@ -51,9 +53,10 @@ var favouriteModule = (function($){
                     type:"GET",
                     data: {
                         action :'storeFavouriteData',
+                        rowId : parseInt(id),
                         favData : favData
                     },
-                    success: function() {
+                    success: function(response) {
                         //add row in the fav table
                         var newRow = $("<tr class='temp' >''</tr>");
                         newRow.append($(`<td>${favData.id}</td>`))
@@ -61,8 +64,10 @@ var favouriteModule = (function($){
                         newRow.append($(`<td>${favData.item}</td>`))
                         newRow.append($(`<i class="fa-solid fa-trash  btnDelete" style="color: #ff0a0a;"></i>`));
                         $(".emptyRow").before(newRow);
+                        $("#favouriteId").val(parseInt(id)+1);
                     }
                 });
+
                 
                 $("#favouriteForm")[0].reset();
             }
