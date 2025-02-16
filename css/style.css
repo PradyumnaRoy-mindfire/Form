@@ -208,19 +208,7 @@ table:hover {
 }
 
 
-.btnEdit {
-    background-color: rgb(44, 212, 44);
-    border-radius: 10px;
-    color: #464949;
-    font-size: calc(3px + 1vw);
-    margin: 2px;
-    width:80%;
-    border: 2px solid rgb(9, 175, 9);
-}
-.btnEdit:hover {
-    background-color: greenyellow;
-    transform: scale(1.1);
-}
+
 .btnDelete {
     background-color: rgb(243, 65, 42);
     border-radius:10px ;

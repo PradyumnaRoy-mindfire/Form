@@ -263,7 +263,7 @@
             <h4>THANK YOU</h4>
             <p>Your Data is <b>Updated Successfully</b>...</p>
         </div>
-    </div>
+    </div> -->
 
    
     
@@ -277,4 +277,4 @@
                 <button id="btnCancelPopup"><b>CANCEL</b></button>
             </div>
         </div>
-    </div> -->
+    </div>

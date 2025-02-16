@@ -4,7 +4,7 @@
         "fname": "Pradyumna",
         "lname": "Roy",
         "pass": "Roy@9734",
-        "phno": "0629749690",
+        "phno": "0629749693",
         "email": "roypradyumna7@gmail.com",
         "gender": "",
         "address": "jagamara,Khandagiri",
@@ -24,23 +24,8 @@
             },
             "3": {
                 "id": 3,
-                "name": "ew",
-                "item": "sdf"
-            },
-            "4": {
-                "id": 4,
-                "name": "hi",
-                "item": "ll"
-            },
-            "5": {
-                "id": 5,
-                "name": "jsd",
-                "item": "ds"
-            },
-            "6": {
-                "id": "6",
-                "name": "done",
-                "item": "sda"
+                "name": "sd",
+                "item": "sd"
             }
         }
     },

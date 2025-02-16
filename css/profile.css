@@ -35,7 +35,6 @@ body {
 } 
 .inpDiv{
     width: 100%;
-    margin: 15px;
 }
 input{
     font-size: calc(5px + 1vw);
@@ -98,6 +97,7 @@ h3 {
 }
 
 #btnUpdate{
+    margin: calc(2px + 1.5vw) 0px 5px 0px;
     width: 100%;
 }
 
@@ -203,7 +203,7 @@ tr:nth-child(even) {
 }
 #btnUpdate:hover {
     background: linear-gradient(45deg,#ff3333,#4f1919);
-    box-shadow: 0px 0px 6px 6px rgb(128, 119, 119);
+    box-shadow: 0px 0px 6px 6px rgb(193 115 50);
     transform: scale(1.1);
 }
 .container:not(:focus-within){
@@ -354,12 +354,12 @@ tr:nth-child(even) {
     color: red;
 }
 #favNameErr {
-    position: absolute;
-    bottom: 30%;
-    left: 15%;
+    position: relative;
+    bottom: calc(8px + 2vw);
+    right: 12%;
 }
 #favItemErr {   
-    position: absolute;
-    bottom: 14%;
-    left: 15%;
+    position: relative;
+    bottom: calc(8px + 2vw);
+    right: 12%;
 }

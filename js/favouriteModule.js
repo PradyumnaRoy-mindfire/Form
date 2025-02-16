@@ -12,11 +12,9 @@ var favouriteModule = (function($){
         
         $(".Favourite-btn").on('click',function(e) {
             e.preventDefault();
-            console.log("fab button clicked");
             let favData = {};
 
             let id = $("#favouriteId").val();
-            console.log(id,"hidden id");
             let name = $("#favouriteName").val();
             let item = $("#favouriteItem").val();
                 //favourite data validation
@@ -76,12 +74,9 @@ var favouriteModule = (function($){
     
     function favouriteDelete(){
         $(".container2").on('click', '.btnDelete', function() {
-            console.log("Delete button clicked");
             var row = $(this).closest('tr'); 
             var slno = row.find('td:eq(0)').text();
-            console.log(slno);
             var id = row.index();
-            console.log(id,"id");
             $.ajax({
                 url: '/test/Form/php/deleteFavourite.php', 
                 type: 'GET', //  GET request sending to php
@@ -101,18 +96,29 @@ var favouriteModule = (function($){
     
     function logOut() {
         $('.logoutIcon').on('click',function() {
-            $.ajax({
-                url:'/test/Form/php/profile.php',
-                type : 'GET',
-                data : {
-                    action : 'logout'
-                },
-                success : function(){
-                    pageModule.displayLogoutPopup('.logputPopup')
-            
-                    window.location.href = "http://localhost/test/Form/php/login.php";
-                }
+                //confirmation message
+            pageModule.displayLogoutPopup('.logputPopup');
+            $('#btnLogoutPopup').on('click',function() {
+                $.ajax({
+                    url:'/test/Form/php/profile.php',
+                    type : 'GET',
+                    data : {
+                        action : 'logout'
+                    },
+                    success : function(){
+                        pageModule.displayLogoutPopup('.logputPopup')
+                
+                        window.location.href = "http://localhost/test/Form/php/login.php";
+                    }
+                });
+                $(".container").removeClass("doBlur");
             });
+
+            $('#btnCancelPopup').on('click',function() {
+                $(".container").removeClass("doBlur");
+                $('.logoutPopup').hide(500);
+            });
+            
             
         });
     }

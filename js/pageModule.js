@@ -79,6 +79,21 @@ var pageModule = (function($){
             $("#terms").removeClass('errorEffect');
             $("#terms-err").text("");
         });
+
+            //for updatation in profile page
+        $(".profileInput").on('input',function() {
+            $(".profileInput").removeClass('errorEffect');
+            $("#pfname-err").text("");
+        });
+        $("#phnoProfile").on('input',function() {
+            $("#phnoProfile").removeClass('errorEffect');
+            $("#pfphno-err").text("");
+        });
+        $("#emailProfile").on('input',function() {
+            $("#emailProfile").removeClass('errorEffect');
+            $("#pfemail-err").text("");
+        });
+
            //for favInput
         $("#favouriteName").on('input',function() {
             $("#favouriteName").removeClass('errorEffect');
@@ -89,9 +104,6 @@ var pageModule = (function($){
             $("#favouriteItem").removeClass('errorEffect');
             $("#favItemErr").text("");
         });
-
-
-        
        
     }
     //         //Show Password
@@ -118,7 +130,6 @@ var pageModule = (function($){
     //for update button
     function updateButtontoggle() {
         $(".profileInput").on('click',function(){
-            console.log("Botto");
             $('.update').show();
         })
 
@@ -134,11 +145,12 @@ var pageModule = (function($){
         $(`${place}`).show();
         setTimeout(function() {
             $(`${place}`).hide();
-            $(".container").removeClass("doBlur")
+            $(".container").removeClass("doBlur");
         },1000)
     }
-    function displayLogoutPopup(place) {
-        $(`${place}`).addClass('showPopup');
+    function displayLogoutPopup() {
+        $(".container").addClass("doBlur");
+        $('.logoutPopup').show();
     }
     
     function init() {

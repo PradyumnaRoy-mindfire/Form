@@ -90,19 +90,15 @@ var validationModule = (function () {
             isValid = false;
         } 
 
-        console.log(isValid, "Validation Result");
         return isValid;
     }
     async function submit() {
-        console.log("live");
         $("#fname, #lname, #email, #phno, #pin").on("keyup", validation);
 
         $("#terms").on("change", validation);
 
         $("#submit").on("click", function (e) {
             let formValid = validation(); 
-
-            console.log("Submit clicked, isValid:", formValid);
 
             if (!formValid) {
                 e.preventDefault(); 
