@@ -74,7 +74,7 @@
                         
                     }
             }
-
+                //For reindexing the favourite data 
             if($data[$_SESSION['userId']]['favourite']) {
                     //copying the values to the favourites array with default index(if we had deleted before)
                 $favourites = array_values($data[$_SESSION['userId']]['favourite']); 
@@ -245,6 +245,19 @@
     </div>
 
 
+    <div class="logoutPopup">
+        <div class="logoutContent">
+            <span><i class="fa-solid fa-circle-exclamation fa-shake" id="logoutWarnIcon"style="color: #f56224;" title="Logout"></i></i></span>
+            <h4>Log Out</h4>
+            <p>Are you sure, you want to log out?</p>
+            <div class="btn">
+                <button id="btnLogoutPopup"><b>Yes,Logout</b></button>
+                <button id="btnCancelPopup"><b>CANCEL</b></button>
+            </div>
+        </div>
+    </div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="../js/script.js"></script>
@@ -257,14 +270,4 @@
 </html>
 
     
-    <div class="logoutPopup">
-        <div class="logoutContent">
-            <span><i class="fa-solid fa-circle-exclamation fa-shake" id="logoutWarnIcon"style="color: #f56224;" title="Logout"></i></i></span>
-            <h4>Log Out</h4>
-            <p>Are you sure, you want to log out?</p>
-            <div class="btn">
-                <button id="btnLogoutPopup"><b>Yes,Logout</b></button>
-                <button id="btnCancelPopup"><b>CANCEL</b></button>
-            </div>
-        </div>
-    </div>
+   

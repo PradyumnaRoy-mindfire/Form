@@ -69,7 +69,7 @@
             'terms' => $terms,
             'favourite' => [],
         );
-            //append the formdata to the data array
+            //append the formdata to the data array to the correspoding userId
         $data[$length+1] = $formData;
 
         // Encode the data back into a JSON format
@@ -96,7 +96,7 @@
             <h2>Registration Form</h2>
             <div class="form-container">
 
-                    <!-- entype is encryption type used for security purpose -->
+                    <!-- entype is encryption type used for security purpose in uploading file-->
                 <form  id="form" action="/test/Form/php/registration.php" method="POST" enctype="multipart/form-data">  
                     <div class="input-name">
                         <label for="fname" class="redStar">First Name</label>
