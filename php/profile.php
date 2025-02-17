@@ -256,16 +256,6 @@
 
 </html>
 
-
-<!-- <div class="updatePopup">
-        <div class="updateContent">
-            <span><i class="fa-regular fa-circle-check fa-beat" style="color: #31ed47;" id="successIcon"></i></span>
-            <h4>THANK YOU</h4>
-            <p>Your Data is <b>Updated Successfully</b>...</p>
-        </div>
-    </div> -->
-
-   
     
     <div class="logoutPopup">
         <div class="logoutContent">

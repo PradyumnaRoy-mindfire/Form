@@ -22,7 +22,7 @@ var favouriteModule = (function($){
             $("#favNameErr").text("");
             $("#favItemErr").text("");
 
-            if (/^[A-Za-z]+$/.test(name) == false || name == "") {
+            if (name === "") {
                 $("#favNameErr").text("**This field is required...");
                 $("#favouriteName").addClass('errorEffect');
                 

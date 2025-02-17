@@ -140,14 +140,7 @@ var pageModule = (function($){
         })
     }
 
-    function displaySubmitPopup(place) {      //place is refering where to show after login or after registration
-        $(".container").addClass("doBlur")
-        $(`${place}`).show();
-        setTimeout(function() {
-            $(`${place}`).hide();
-            $(".container").removeClass("doBlur");
-        },1000)
-    }
+    
     function displayLogoutPopup() {
         $(".container").addClass("doBlur");
         $('.logoutPopup').show();
@@ -161,7 +154,6 @@ var pageModule = (function($){
     }
     return {
         init:init,
-        displaySubmitPopup:displaySubmitPopup,
         displayLogoutPopup:displayLogoutPopup
     }
 })(jQuery)

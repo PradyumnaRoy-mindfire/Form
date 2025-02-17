@@ -230,22 +230,6 @@
         
     </div>
 
-    <div class="submitPopup">
-        <div class="submitContent">
-            <span><i class="fa-regular fa-circle-check fa-beat" style="color: #31ed47;" id="successIcon"></i></span>
-            <h4>THANK YOU</h4>
-            <p>Your data has been saved successfully...</p>
-        </div>
-    </div>
-
-    <div class="errorPopup">
-        <div class="errorContent">
-            <span><i class="fa-solid fa-square-xmark fa-shake" style="color: #f70202;" id="blankErrorIcon"></i></span>
-            <h4>Sorry</h4>
-            <p>Fill in the <b>required blank fields</b>...</p>
-        </div>
-    </div>
-
        <!-- jquery CDN -->
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
        

@@ -62,5 +62,30 @@
         "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67b1c04a4429a_loginbackground.jpg",
         "terms": true,
         "favourite": []
+    },
+    "4": {
+        "userId": 4,
+        "fname": "Paras",
+        "lname": "Bhatia",
+        "pass": "Roy@9734",
+        "phno": "6297496905",
+        "email": "paras@gmail.com",
+        "gender": "",
+        "address": "OUTR",
+        "pin": "751030",
+        "photo": "",
+        "terms": true,
+        "favourite": {
+            "1": {
+                "id": 1,
+                "name": "Drinks",
+                "item": "Amul Cool"
+            },
+            "2": {
+                "id": 2,
+                "name": "Actor",
+                "item": "Amir Khan"
+            }
+        }
     }
 }
