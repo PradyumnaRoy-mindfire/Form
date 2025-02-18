@@ -1,5 +1,5 @@
 var pageModule = (function($){
-    
+        //to show the recommandation span of format for input 
     function recomandation(){
         $("#fname-warn").on('focus',function(){
             $("#fname-recom").fadeIn();
@@ -39,6 +39,7 @@ var pageModule = (function($){
         });
 
     }
+        //for hiding the error span along with putting input
     function hideError() {
         $("#fname").on('input',function() {
             $("#fname").removeClass('errorEffect');
@@ -126,8 +127,17 @@ var pageModule = (function($){
 
         });
     }
+        //for submit and login popup
+    function displaySubmitPopup(place) {      //place is refering where to show after login or after registration
+        $(".container").addClass("doBlur")
+        $(`${place}`).show();
+        setTimeout(function() {
+            $(`${place}`).hide();
+            $(".container").removeClass("doBlur")
+        },1000)
+    }
 
-    //for update button
+       //for updation of profile
     function updateButtontoggle() {
         $(".profileInput").on('click',function(){
             $('.update').show();
@@ -154,6 +164,7 @@ var pageModule = (function($){
     }
     return {
         init:init,
-        displayLogoutPopup:displayLogoutPopup
+        displayLogoutPopup:displayLogoutPopup,
+        displaySubmitPopup:displaySubmitPopup
     }
 })(jQuery)

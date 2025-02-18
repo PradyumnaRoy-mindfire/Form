@@ -69,7 +69,7 @@
             'terms' => $terms,
             'favourite' => [],
         );
-            //append the formdata to the data array to the correspoding userId
+            //append the formdata to the data array
         $data[$length+1] = $formData;
 
         // Encode the data back into a JSON format
@@ -96,7 +96,7 @@
             <h2>Registration Form</h2>
             <div class="form-container">
 
-                    <!-- entype is encryption type used for security purpose in uploading file-->
+                    <!-- entype is encryption type used for security purpose -->
                 <form  id="form" action="/test/Form/php/registration.php" method="POST" enctype="multipart/form-data">  
                     <div class="input-name">
                         <label for="fname" class="redStar">First Name</label>
@@ -229,6 +229,8 @@
 
         
     </div>
+
+    
 
        <!-- jquery CDN -->
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>

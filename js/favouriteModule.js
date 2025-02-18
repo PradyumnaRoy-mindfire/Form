@@ -106,8 +106,6 @@ var favouriteModule = (function($){
                         action : 'logout'
                     },
                     success : function(){
-                        pageModule.displayLogoutPopup('.logputPopup')
-                
                         window.location.href = "http://localhost/test/Form/php/login.php";
                     }
                 });

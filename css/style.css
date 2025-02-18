@@ -228,6 +228,7 @@ table:hover {
     box-shadow: 0px 0px 20px 3px red;
 }
 .recomandation {
+    color: #fdd607;
     font-size: calc(1px + 0.9vw);
     font-family: sans-serif;
     display: none;
@@ -250,56 +251,6 @@ table:hover {
     cursor: pointer;
 }
 
-
-.submitPopup,.errorPopup {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%) scale(1);
-    background-color:bisque;
-    color: black;
-    box-shadow: 10px 10px 5px rgb(138, 135, 135);
-    width: 25%;
-    height: calc(30px + 15vw);
-    display: none;
-    border: 2px solid black;
-    z-index: 2;
-}
-
-.submitContent,.errorContent {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: calc(1px + 0.5vw);
-    padding: calc(1px + 0.5vw);
-}
-
-
-
-#successIcon {
-    position: relative;
-    left: 35%;
-    font-size: calc(5px + 5vw);
-    margin: calc(1px + 0.2vw);
-    padding: calc(1px + 0.2vw);
-}
-#blankErrorIcon{
-    position: relative;
-    left: 35%;
-    font-size: calc(5px + 5vw);
-    margin: calc(1px + 0.2vw);
-    padding: calc(1px + 0.2vw);
-}
-.submitContent>h4,p {
-    padding: calc(1px + 0.5vw);
-}
-.submitContent>p {
-    font-size: calc(3px + 1vw);
-}
-.errorContent>h4,p {
-    padding: calc(1px + 0.5vw);
-}
-.errorContent>p {
-    font-size: calc(3px + 1vw);
-}
 .showPopup {
     display: block;
 }

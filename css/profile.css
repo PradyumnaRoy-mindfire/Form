@@ -80,7 +80,6 @@ h3 {
     border-radius: 50%;
     position: absolute;
     top: 2%;
-    /* display: none; */
 }
 
 .favourite,.logout{
@@ -346,7 +345,6 @@ tr:nth-child(even) {
     box-shadow: 0px 0px 20px 3px rgb(240, 96, 96);
 }
 .err-msg {
-    /* display: none; */
     font-size: calc(2px + 1vw);
     font-family:sans-serif;
     font-style: italic;

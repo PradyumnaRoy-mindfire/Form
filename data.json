@@ -51,40 +51,36 @@
     },
     "3": {
         "userId": 3,
-        "fname": "Jai",
-        "lname": "Milan",
+        "fname": "Subham",
+        "lname": "Dash",
         "pass": "Roy@9734",
-        "phno": "7001254856",
-        "email": "jai@gmail.com",
-        "gender": "",
-        "address": "Bhadrak,Odisha",
-        "pin": "751025",
-        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67b1c04a4429a_loginbackground.jpg",
-        "terms": true,
-        "favourite": []
-    },
-    "4": {
-        "userId": 4,
-        "fname": "Paras",
-        "lname": "Bhatia",
-        "pass": "Roy@9734",
-        "phno": "6297496905",
-        "email": "paras@gmail.com",
-        "gender": "",
-        "address": "OUTR",
+        "phno": "0629749690",
+        "email": "subham@gmail.com",
+        "gender": "Male",
+        "address": "jagamara,Khandagiri",
         "pin": "751030",
-        "photo": "",
+        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67b410d86130c_cat.png",
         "terms": true,
         "favourite": {
             "1": {
                 "id": 1,
-                "name": "Drinks",
-                "item": "Amul Cool"
+                "name": "Car",
+                "item": "BMW"
             },
             "2": {
                 "id": 2,
-                "name": "Actor",
-                "item": "Amir Khan"
+                "name": "Place",
+                "item": "Kashmir"
+            },
+            "3": {
+                "id": 3,
+                "name": "Food",
+                "item": "Gupchup"
+            },
+            "4": {
+                "id": 4,
+                "name": "Phone",
+                "item": "15pro Max"
             }
         }
     }
