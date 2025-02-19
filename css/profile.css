@@ -267,7 +267,38 @@ tr:nth-child(even) {
     font-size: calc(3px + 1vw);
 }
 
+.loginPopup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(1);
+    background-color:bisque;
+    color: black;
+    box-shadow: 10px 10px 5px rgb(138, 135, 135);
+    width: 25%;
+    height: calc(30px + 15vw);
+    border: 2px solid black;
+    z-index: 2;
+}
 
+.loginContent {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: calc(1px + 0.5vw);
+    padding: calc(1px + 0.5vw);
+}
+#successIcon {
+    position: relative;
+    left: 35%;
+    font-size: calc(5px + 5vw);
+    margin: calc(1px + 0.2vw);
+    padding: calc(1px + 0.2vw);
+}
+.loginContent>h4,p {
+    padding: calc(1px + 0.5vw);
+}
+.loginContent>p {
+    font-size: calc(3px + 1vw);
+}
 
 .logoutPopup {
     display: none;
@@ -361,3 +392,4 @@ tr:nth-child(even) {
     bottom: calc(8px + 2vw);
     right: 12%;
 }
+

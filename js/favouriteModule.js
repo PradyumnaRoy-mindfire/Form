@@ -8,6 +8,7 @@ var favouriteModule = (function($){
     $('#openForm').on('click',function() {
         $(".dropdown-form").toggle();
     })
+    
     function storeFavouriteData(){
         
         $(".Favourite-btn").on('click',function(e) {
@@ -99,6 +100,9 @@ var favouriteModule = (function($){
                 //confirmation message
             pageModule.displayLogoutPopup('.logputPopup');
             $('#btnLogoutPopup').on('click',function() {
+                $(".container").removeClass("doBlur");
+                $('.logoutPopup').hide(500);
+
                 $.ajax({
                     url:'/test/Form/php/profile.php',
                     type : 'GET',
@@ -109,7 +113,6 @@ var favouriteModule = (function($){
                         window.location.href = "http://localhost/test/Form/php/login.php";
                     }
                 });
-                $(".container").removeClass("doBlur");
             });
 
             $('#btnCancelPopup').on('click',function() {

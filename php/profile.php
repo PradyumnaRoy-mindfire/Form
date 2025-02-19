@@ -10,24 +10,47 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <?php 
+       if(session_status() == PHP_SESSION_NONE)
+            session_start();
+
+       if(isset($_SESSION['login']) ) { ?>
+            <div class="loginPopup">
+                <div class="loginContent">
+                    <span><i class="fa-regular fa-circle-check fa-beat" style="color: #31ed47;" id="successIcon"></i></span>
+                    <h4>THANK YOU</h4>
+                    <p>Loginned successfully...</p>
+                </div>
+            </div>
+
+        <?php } 
+      unset($_SESSION['login']);   
+    ?>
+
+
+
     <?php
-        session_start();
+        include __DIR__.'/exception.php';
             //if session expired redirect to the login page
         if( !$_SESSION['userId']) {
-            header("Location: http://localhost/test/Form/php/login.php",true,301);
+            header("Location: http://localhost/test/Form/php/login",true,301);
             exit();
         }
         $jsonFile = $_SERVER['DOCUMENT_ROOT'] . '/test/Form/data.json';
-
-        if (file_exists($jsonFile) && file_get_contents($jsonFile)) {
-            $jsonData = file_get_contents($jsonFile);
-            $data = json_decode($jsonData, true);
-        } else {
-            $data = [];
-        
-            file_put_contents($jsonFile, json_encode($data, JSON_PRETTY_PRINT));
+        try{
+            if (file_exists($jsonFile) && file_get_contents($jsonFile)) {
+                $jsonData = file_get_contents($jsonFile);
+                $data = json_decode($jsonData, true);
+            } else {
+                $data = [];
+                throw new Exception("File not found.....");
+                file_put_contents($jsonFile, json_encode($data, JSON_PRETTY_PRINT));
+            }
         }
-
+        catch(Exception $e){
+            my_error_log('FATAL', $e->getMessage(),$e->getFile(),$e->getLine());
+        }
+        
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $fname = isset($_POST['fname']) ? $_POST['fname'] : $_SESSION['fname'];
@@ -42,6 +65,7 @@
             $emailErr = "";
             $phnoErr = "";
 
+                //validations for favourite input (name and item) both can't be null ,name will have only characters
             if(empty($fname) || preg_match('/\d/',$fname) || preg_match('/\d/',$lname)) {
                 $nameErr = "**First name and last name should not be empty or not contain any digits";
                 $isValid = false;
@@ -73,7 +97,7 @@
                         
                     }
             }
-                //For reindexing the favourite data 
+                //click update button For reindexing SL no of the favourite data 
             if($data[$_SESSION['userId']]['favourite']) {
                     //copying the values to the favourites array with default index(if we had deleted before)
                 $favourites = array_values($data[$_SESSION['userId']]['favourite']); 
@@ -99,7 +123,7 @@
         }
 
 
-            // For favourite data store
+            // For favourite data store request coming from ajax (favourite.js)
         if(isset($_GET['action']) && $_GET['action'] == 'storeFavouriteData') {
             $favouriteName = $_GET['favData']['name'];
             $favouriteItem = $_GET['favData']['item'];
@@ -122,7 +146,7 @@
         }
 
 
-            //log out
+            //log out request coming from ajax (favourite.js)
         if(isset($_GET['action']) && $_GET['action'] == 'logout') {
             session_destroy();
         }

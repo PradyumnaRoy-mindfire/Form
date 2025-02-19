@@ -1,0 +1,20 @@
+[18-02-2025 12:30:27] Level: ERROR - Message: Database connection failed!
+----------------------------------------
+[18-02-2025 12:30:27] Level: EXCEPTION - Message: A custom exception occurred!
+----------------------------------------
+[18-02-2025 12:30:28] Level: ERROR - Message: Database connection failed!
+----------------------------------------
+[18-02-2025 12:30:28] Level: EXCEPTION - Message: A custom exception occurred!
+----------------------------------------
+[18-02-2025 12:38:23] Level: ERROR - Message: Error occured
+----------------------------------------
+[18-02-2025 12:38:23] Level: EXCEPTION - Message: Division by zero
+----------------------------------------
+[18-02-2025 13:08:21] /var/www/html/test/Tutorial/exception.php Line No. 72 Level: EXCEPTION - Message: Division by zero
+----------------------------------------
+[18-02-2025 13:09:23] Level: EXCEPTION - Message: Division by zero
+/var/www/html/test/Tutorial/exception.php Line No. 72 ----------------------------------------
+[18-02-2025 13:09:54] Level: EXCEPTION - Message: Division by zero /var/www/html/test/Tutorial/exception.php Line No. 72
+ ----------------------------------------
+[18-02-2025 15:29:22] Level: EXCEPTION - Message: Division by zero /var/www/html/test/Form/php/registration.php Line No. 25
+ -----------------------------------------------------

@@ -12,38 +12,65 @@
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
     
+    <?php 
+       if(session_status() == PHP_SESSION_NONE)
+            session_start();
+        
+       if(isset($_SESSION['registration']) ) { ?>
+        <div class="submitPopup">
+            <div class="submitContent">
+                <span><i class="fa-regular fa-circle-check fa-beat" style="color: #31ed47;" id="successIcon"></i></span>
+                <h4>THANK YOU</h4>
+                <p>Your data has been saved successfully...</p>
+            </div>
+        </div>
+
+    <?php } 
+      unset($_SESSION['registration']);   
+    ?>
    
 
     <?php
-        session_start();
-        
-       
-        $jsonFile = $_SERVER['DOCUMENT_ROOT'].'/test/Form/data.json';
-        
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $email = $_POST['email'];
-            $pass = $_POST['pass'];
-            $jsonData = file_get_contents($jsonFile);
-            $data = json_decode($jsonData, true);
+        include __DIR__.'/exception.php';
 
-            
+        try {
+            $jsonFile = $_SERVER['DOCUMENT_ROOT'].'/test/Form/data.json';
 
-            $length = sizeof($data);
-            for($i = 1;$i <= $length;$i++) {
-                if($data[$i]['email'] == $email && $data[$i]['pass'] == $pass) {
-                    $_SESSION['userId'] = $data[$i]['userId'];
-                    $_SESSION['fname'] = $data[$i]['fname'];
-                    $_SESSION['lname'] = $data[$i]['lname'];
-                    $_SESSION['phno'] = $data[$i]['phno'];
-                    $_SESSION['email'] = $data[$i]['email'];
-                    $_SESSION['address'] = $data[$i]['address'];
-                    $_SESSION['photo'] = $data[$i]['photo'];
-                    $_SESSION['totalFavourite'] = count($data[$i]['favourite']);
-                    header("Location: http://localhost/test/Form/php/profile.php",true,302);   //301 for permanent redirection ,302 for temporary
-                    exit();
+            if(!file_exists($jsonFile)) {
+                throw new Exception("File not found.....");
+            }
+
+            if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $email = $_POST['email'];
+                $pass = $_POST['pass'];
+                $jsonData = file_get_contents($jsonFile);
+                $data = json_decode($jsonData, true);
+                
+                
+                $length = sizeof($data);
+                for($i = 1;$i <= $length;$i++) {
+                    if($data[$i]['email'] == $email && $data[$i]['pass'] == $pass) {
+                        $_SESSION['userId'] = $data[$i]['userId'];
+                        $_SESSION['fname'] = $data[$i]['fname'];
+                        $_SESSION['lname'] = $data[$i]['lname'];
+                        $_SESSION['phno'] = $data[$i]['phno'];
+                        $_SESSION['email'] = $data[$i]['email'];
+                        $_SESSION['address'] = $data[$i]['address'];
+                        $_SESSION['photo'] = $data[$i]['photo'];
+                        $_SESSION['totalFavourite'] = count($data[$i]['favourite']);
+
+                        $_SESSION['login'] = "Login successfull";
+                        header("Location: http://localhost/test/Form/php/profile",true,302);   //301 for permanent redirection ,302 for temporary
+                        exit();
+                    }
                 }
             }
         }
+        catch(Exception $e) {
+            my_error_log('FATAL', $e->getMessage(),$e->getFile(),$e->getLine());
+        }
+
+        
     ?>
 
      
@@ -102,7 +129,7 @@
         
     </div>
    
-    
+     
 
        <!-- jquery CDN -->
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>

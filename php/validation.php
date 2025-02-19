@@ -42,6 +42,7 @@
     }
    
         //checking email is unique or not
+    
     $isUniqueUser = true;
     $jsonFile = $_SERVER['DOCUMENT_ROOT'] . '/test/Form/data.json';
 

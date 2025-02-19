@@ -127,15 +127,8 @@ var pageModule = (function($){
 
         });
     }
-        //for submit and login popup
-    function displaySubmitPopup(place) {      //place is refering where to show after login or after registration
-        $(".container").addClass("doBlur")
-        $(`${place}`).show();
-        setTimeout(function() {
-            $(`${place}`).hide();
-            $(".container").removeClass("doBlur")
-        },1000)
-    }
+        
+ 
 
        //for updation of profile
     function updateButtontoggle() {
@@ -149,7 +142,15 @@ var pageModule = (function($){
             },500);
         })
     }
-
+        //to remove submit and login popup
+    function removePopup() {
+        setTimeout(function(){
+            $('.submitPopup').fadeOut();
+        },500);
+        setTimeout(function(){
+            $('.loginPopup').fadeOut();
+        },500);
+    }
     
     function displayLogoutPopup() {
         $(".container").addClass("doBlur");
@@ -157,6 +158,7 @@ var pageModule = (function($){
     }
     
     function init() {
+        removePopup();
         hideError();
         showHiddenPassword();
         recomandation();
@@ -165,6 +167,5 @@ var pageModule = (function($){
     return {
         init:init,
         displayLogoutPopup:displayLogoutPopup,
-        displaySubmitPopup:displaySubmitPopup
     }
 })(jQuery)

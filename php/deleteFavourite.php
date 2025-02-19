@@ -2,7 +2,7 @@
     session_start();
             //if the session expired or the user log  out
         if( !$_SESSION['userId']) {
-            header("Location: http://localhost/test/Form/php/login.php",true,301);
+            header("Location: http://localhost/test/Form/php/login",true,301);
             exit();
         }
 

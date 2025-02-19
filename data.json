@@ -83,5 +83,45 @@
                 "item": "15pro Max"
             }
         }
+    },
+    "4": {
+        "userId": 4,
+        "fname": "Hriday",
+        "lname": "Haran",
+        "pass": "Hr@123",
+        "phno": "9732458975",
+        "email": "hr@gmail.com",
+        "gender": "Male",
+        "address": "Sector iii,Pune,India",
+        "pin": "645789",
+        "photo": "\/var\/www\/html\/test\/Form\/profilePhoto\/67b57aaa302e3_testBack.jpg",
+        "terms": true,
+        "favourite": {
+            "1": {
+                "id": 1,
+                "name": "Passion",
+                "item": "Singing"
+            },
+            "2": {
+                "id": 2,
+                "name": "Cricketer",
+                "item": "Virat Kohli"
+            },
+            "3": {
+                "id": 3,
+                "name": "Actor",
+                "item": "Shaharukh Khan"
+            },
+            "4": {
+                "id": 4,
+                "name": "IPL team",
+                "item": "MI"
+            },
+            "5": {
+                "id": "5",
+                "name": "Movie",
+                "item": "PK"
+            }
+        }
     }
 }
