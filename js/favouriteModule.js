@@ -58,7 +58,7 @@ var favouriteModule = (function($){
                     success: function(response) {
                         //add row in the fav table
                         var newRow = $("<tr class='temp' >''</tr>");
-                        newRow.append($(`<td>${favData.id}</td>`))
+                        newRow.append($(`<td style="display: none;">${favData.id}</td>`))
                         newRow.append($(`<td>${favData.name}</td>`))
                         newRow.append($(`<td>${favData.item}</td>`))
                         newRow.append($(`<i class="fa-solid fa-trash  btnDelete" style="color: #ff0a0a;"></i>`));
@@ -110,7 +110,7 @@ var favouriteModule = (function($){
                         action : 'logout'
                     },
                     success : function(){
-                        window.location.href = "http://localhost/test/Form/php/login.php";
+                        window.location.href = `http://${window.location.hostname}/test/Form/php/login.php`;
                     }
                 });
             });

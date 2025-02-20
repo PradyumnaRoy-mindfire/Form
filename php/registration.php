@@ -13,33 +13,28 @@
     
     <?php
     include __DIR__.'/exception.php';
+    include __DIR__.'/database.php';
 
-    if(session_status() == PHP_SESSION_NONE)
+    if(session_status() == PHP_SESSION_NONE) {
         session_start();
+    }
 
     try {
         //For empty field validations
         include $_SERVER['DOCUMENT_ROOT'].'/test/Form/php/validation.php';
-
-        $jsonFile = $_SERVER['DOCUMENT_ROOT'].'/test/Form/data.json';
-
-        if(!file_exists($jsonFile)) {
-            throw new Exception("File not found.....");
-        }
     
-    
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $isEmpty == false && $isUniqueUser == true) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $isUniqueUser == true && $isEmpty == false) {
             $fname = $_POST['fname'];
             $lname = $_POST['lname'] ;
             $pass = $_POST['pass'] ;
             $phno = $_POST['phno'] ;
             $email = $_POST['email'] ;
             $gender = isset($_POST['gender']) ? $_POST['gender']:"";
-            $address = $_POST['address'] ;
+            $adress = $_POST['adress'] ;
             $pin = $_POST['pin'] ;
             $terms = isset($_POST['terms']) ? true : false;
             $photoPath = ""; //For photo
-
+            
                 // checking if the photo is uploaded or not
             if(isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
                 $photo = $_FILES['photo'];
@@ -58,54 +53,51 @@
 
                 move_uploaded_file($photoTmpPath, $photoPath);
             }
-            
-                //if error occured during 
-            if($_FILES['photo']['error'] != UPLOAD_ERR_OK) {
-                throw new Exception("Photo upload failed");
-            }
-            
-                //if file exist 
-            if (file_exists($jsonFile)) {
-                $jsonData = file_get_contents($jsonFile);
-                $data = json_decode($jsonData, true); 
-            } else {
-                // If the file does not exist, create an empty array
-                $data = array(); 
-            }
-            $length = sizeof($data);
+           
             $formData = array(
-                'userId' => sizeof($data)+1,
                 'fname' => $fname,
                 'lname' => $lname,
                 'pass' => $pass,
                 'phno' => $phno,
                 'email' => $email,
                 'gender' => $gender,
-                'address' => $address,
+                'adress' => $adress,
                 'pin' => $pin,
                 'photo' => $photoPath,
                 'terms' => $terms,
-                'favourite' => [],
             );
-                //append the formdata to the data array
-            $data[$length+1] = $formData;
-
-            // Encode the data back into a JSON format
-            $jsonData = json_encode($data, JSON_PRETTY_PRINT);
 
 
-            // Save again the new data into the JSON file
-            file_put_contents($jsonFile, $jsonData);
-
-                
-            if (file_put_contents($jsonFile, $jsonData) === false) {
-                throw new Exception("Failed to write data to JSON file.");
+            $sql = "INSERT INTO users (fname, lname, pass, phno, email, gender, pin, photo, terms, adress) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        
+            $stmt = mysqli_prepare($GLOBALS['conn'], $sql);
+        
+            mysqli_stmt_bind_param($stmt, "ssssssssis", 
+                $formData['fname'], 
+                $formData['lname'], 
+                $formData['pass'], 
+                $formData['phno'], 
+                $formData['email'], 
+                $formData['gender'], 
+                $formData['pin'], 
+                $formData['photo'],             
+                $formData['terms'],  
+                $formData['adress']
+            );
+        
+            if (mysqli_stmt_execute($stmt)) {
+                echo "User inserted successfully!";
+            } else {
+                echo "Error occured";
             }
+            
+            mysqli_stmt_close($stmt);
 
                 //for registration pop up
             $_SESSION['registration'] = "registered Successfully";
             // location will came back to this page itself ,it prevents from storing data in to json file while reloading
-            header("Location: http://localhost/test/Form/php/login",true,301);
+            header("Location: http://".$_SERVER['SERVER_NAME']."/test/Form/php/login",true,301);
             exit();
         }
     }
@@ -217,7 +209,7 @@
 
                     <div class="input-name">
                         <label for="">Address</label>
-                        <input type="text" placeholder="Address" class="inp-addr" id="address" name="address">
+                        <input type="text" placeholder="Address" class="inp-addr" id="adress" name="adress">
                     </div>
 
                     <div class="input-name">

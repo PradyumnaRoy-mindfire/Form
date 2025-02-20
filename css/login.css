@@ -145,7 +145,7 @@ label{
     text-decoration: none;
 }
 
-.input-address, .input-name {
+.input-adress, .input-name {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

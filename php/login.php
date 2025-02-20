@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
+    <title>Login Form</title>
     <link rel="stylesheet" href="../css/login.css">
 
                 <!-- FontAwasome CDN -->
@@ -13,9 +13,10 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <?php 
-       if(session_status() == PHP_SESSION_NONE)
-            session_start();
-        
+       if(session_status() == PHP_SESSION_NONE){
+           session_start();
+       }
+
        if(isset($_SESSION['registration']) ) { ?>
         <div class="submitPopup">
             <div class="submitContent">
@@ -32,38 +33,42 @@
 
     <?php
         include __DIR__.'/exception.php';
+        include __DIR__.'/database.php';
+        
 
         try {
-            $jsonFile = $_SERVER['DOCUMENT_ROOT'].'/test/Form/data.json';
-
-            if(!file_exists($jsonFile)) {
-                throw new Exception("File not found.....");
-            }
 
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $email = $_POST['email'];
                 $pass = $_POST['pass'];
-                $jsonData = file_get_contents($jsonFile);
-                $data = json_decode($jsonData, true);
-                
-                
-                $length = sizeof($data);
-                for($i = 1;$i <= $length;$i++) {
-                    if($data[$i]['email'] == $email && $data[$i]['pass'] == $pass) {
-                        $_SESSION['userId'] = $data[$i]['userId'];
-                        $_SESSION['fname'] = $data[$i]['fname'];
-                        $_SESSION['lname'] = $data[$i]['lname'];
-                        $_SESSION['phno'] = $data[$i]['phno'];
-                        $_SESSION['email'] = $data[$i]['email'];
-                        $_SESSION['address'] = $data[$i]['address'];
-                        $_SESSION['photo'] = $data[$i]['photo'];
-                        $_SESSION['totalFavourite'] = count($data[$i]['favourite']);
 
-                        $_SESSION['login'] = "Login successfull";
-                        header("Location: http://localhost/test/Form/php/profile",true,302);   //301 for permanent redirection ,302 for temporary
-                        exit();
+                $sql = "SELECT * FROM users";
+                $userData = mysqli_query($conn,$sql);
+
+                $sqlf = "SELECT * FROM favourites";
+                $favouriteData = mysqli_query($conn,$sqlf);
+
+                if (mysqli_num_rows($userData) > 0){
+                    while($row = mysqli_fetch_assoc($userData)) {
+                        if($row['email'] == $email && $row['pass'] == $pass) {
+                            $_SESSION['userId'] = $row['userId'];
+                            $_SESSION['fname'] = $row['fname'];
+                            $_SESSION['lname'] = $row['lname'];
+                            $_SESSION['phno'] = $row['phno'];
+                            $_SESSION['email'] = $row['email'];
+                            $_SESSION['adress'] = $row['adress'];
+                            $_SESSION['photo'] = $row['photo'];
+                            $_SESSION['totalFavourite'] = mysqli_num_rows($favouriteData);
+
+                            $_SESSION['login'] = "Login successfull";
+                            header("Location: http://".$_SERVER['SERVER_NAME']."/test/Form/php/profile",true,302);   //301 for permanent redirection ,302 for temporary
+                            exit();
+                        }
                     }
                 }
+
+                
+                
             }
         }
         catch(Exception $e) {
