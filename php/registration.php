@@ -54,45 +54,10 @@
                 move_uploaded_file($photoTmpPath, $photoPath);
             }
            
-            $formData = array(
-                'fname' => $fname,
-                'lname' => $lname,
-                'pass' => $pass,
-                'phno' => $phno,
-                'email' => $email,
-                'gender' => $gender,
-                'adress' => $adress,
-                'pin' => $pin,
-                'photo' => $photoPath,
-                'terms' => $terms,
-            );
+            $sqlInsert = "INSERT INTO users (fname, lname, pass, phno, email, gender, pin, photo, terms, adress) VALUES ('$fname','$lname','$pass','$phno','$email','$gender','$pin','$photoPath','$terms','$adress')";
 
-
-            $sql = "INSERT INTO users (fname, lname, pass, phno, email, gender, pin, photo, terms, adress) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-        
-            $stmt = mysqli_prepare($GLOBALS['conn'], $sql);
-        
-            mysqli_stmt_bind_param($stmt, "ssssssssis", 
-                $formData['fname'], 
-                $formData['lname'], 
-                $formData['pass'], 
-                $formData['phno'], 
-                $formData['email'], 
-                $formData['gender'], 
-                $formData['pin'], 
-                $formData['photo'],             
-                $formData['terms'],  
-                $formData['adress']
-            );
-        
-            if (mysqli_stmt_execute($stmt)) {
-                echo "User inserted successfully!";
-            } else {
-                echo "Error occured";
-            }
+            mysqli_query($conn,$sqlInsert);
             
-            mysqli_stmt_close($stmt);
 
                 //for registration pop up
             $_SESSION['registration'] = "registered Successfully";
